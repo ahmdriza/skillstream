@@ -1,0 +1,435 @@
+{
+    "courses": [
+        {
+            "id": "rec-1",
+            "slug": "advanced-react-patterns",
+            "title": "Advanced React Patterns & Performance",
+            "description": "Master modern React development with advanced patterns, hooks, performance optimization, and real-world best practices. This comprehensive course covers everything from custom hooks to React Server Components.",
+            "shortDescription": "Master advanced React patterns and build high-performance applications.",
+            "thumbnail": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80",
+            "price": 89.99,
+            "originalPrice": 129.99,
+            "rating": 4.8,
+            "reviewCount": 1247,
+            "enrolledCount": 8540,
+            "category": "Development",
+            "level": "Advanced",
+            "type": "recorded",
+            "instructorId": "inst-1",
+            "totalHours": 24.5,
+            "lessonsCount": 156,
+            "language": "English",
+            "lastUpdated": "2025-12-15",
+            "features": [
+                "24.5 hours video",
+                "156 lessons",
+                "Certificate",
+                "Lifetime access",
+                "Source code included"
+            ],
+            "requirements": [
+                "Basic React knowledge",
+                "JavaScript ES6+",
+                "Understanding of HTML/CSS"
+            ],
+            "whatYouLearn": [
+                "Advanced React Patterns",
+                "Performance Optimization",
+                "Custom Hooks",
+                "State Management",
+                "Testing Strategies"
+            ],
+            "curriculum": [
+                {
+                    "id": "mod-1",
+                    "title": "Introduction to Advanced Patterns",
+                    "lessons": [
+                        {
+                            "id": "les-1",
+                            "title": "Course Overview",
+                            "duration": "08:20",
+                            "type": "video",
+                            "isPreview": true
+                        },
+                        {
+                            "id": "les-2",
+                            "title": "Setting Up Development Environment",
+                            "duration": "12:15",
+                            "type": "video"
+                        },
+                        {
+                            "id": "les-3",
+                            "title": "Module Quiz",
+                            "duration": "05:00",
+                            "type": "quiz"
+                        }
+                    ]
+                },
+                {
+                    "id": "mod-2",
+                    "title": "Custom Hooks Deep Dive",
+                    "lessons": [
+                        {
+                            "id": "les-4",
+                            "title": "Understanding Custom Hooks",
+                            "duration": "15:30",
+                            "type": "video"
+                        },
+                        {
+                            "id": "les-5",
+                            "title": "Building useLocalStorage Hook",
+                            "duration": "18:45",
+                            "type": "video"
+                        },
+                        {
+                            "id": "les-6",
+                            "title": "Building useFetch Hook",
+                            "duration": "22:10",
+                            "type": "video"
+                        },
+                        {
+                            "id": "les-7",
+                            "title": "Hooks Assignment",
+                            "duration": "45:00",
+                            "type": "assignment"
+                        }
+                    ]
+                },
+                {
+                    "id": "mod-3",
+                    "title": "Performance Optimization",
+                    "lessons": [
+                        {
+                            "id": "les-8",
+                            "title": "React DevTools Profiler",
+                            "duration": "14:20",
+                            "type": "video"
+                        },
+                        {
+                            "id": "les-9",
+                            "title": "useMemo and useCallback",
+                            "duration": "19:30",
+                            "type": "video"
+                        },
+                        {
+                            "id": "les-10",
+                            "title": "Code Splitting with React.lazy",
+                            "duration": "16:45",
+                            "type": "video"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "rec-2",
+            "slug": "complete-ui-ux-masterclass",
+            "title": "Complete UI/UX Design Masterclass",
+            "description": "Learn UI/UX design from scratch. This course covers design principles, Figma, prototyping, user research, and building a portfolio that gets you hired.",
+            "shortDescription": "Master UI/UX design with Figma and build an impressive portfolio.",
+            "thumbnail": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+            "price": 79.99,
+            "originalPrice": 119.99,
+            "rating": 4.9,
+            "reviewCount": 2156,
+            "enrolledCount": 12350,
+            "category": "Design",
+            "level": "Beginner",
+            "type": "recorded",
+            "instructorId": "inst-2",
+            "totalHours": 32,
+            "lessonsCount": 184,
+            "language": "English",
+            "lastUpdated": "2025-12-20",
+            "features": [
+                "32 hours video",
+                "184 lessons",
+                "Certificate",
+                "Figma files included",
+                "Portfolio projects"
+            ],
+            "requirements": [
+                "No prior design experience needed",
+                "Computer with internet",
+                "Figma account (free)"
+            ],
+            "whatYouLearn": [
+                "Design Fundamentals",
+                "Figma Mastery",
+                "User Research",
+                "Prototyping",
+                "Design Systems"
+            ],
+            "curriculum": [
+                {
+                    "id": "mod-1",
+                    "title": "Design Fundamentals",
+                    "lessons": [
+                        {
+                            "id": "les-1",
+                            "title": "Welcome to the Course",
+                            "duration": "05:00",
+                            "type": "video",
+                            "isPreview": true
+                        },
+                        {
+                            "id": "les-2",
+                            "title": "Understanding Design Principles",
+                            "duration": "18:30",
+                            "type": "video"
+                        },
+                        {
+                            "id": "les-3",
+                            "title": "Color Theory Basics",
+                            "duration": "22:15",
+                            "type": "video"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "rec-3",
+            "slug": "python-data-science-bootcamp",
+            "title": "Python for Data Science Bootcamp",
+            "description": "Complete Python bootcamp for data science. Learn Python, NumPy, Pandas, Matplotlib, Seaborn, and Machine Learning basics.",
+            "shortDescription": "Learn Python for data science from zero to hero.",
+            "thumbnail": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80",
+            "price": 69.99,
+            "originalPrice": 99.99,
+            "rating": 4.7,
+            "reviewCount": 3421,
+            "enrolledCount": 18920,
+            "category": "Data Science",
+            "level": "Beginner",
+            "type": "recorded",
+            "instructorId": "inst-3",
+            "totalHours": 45,
+            "lessonsCount": 220,
+            "language": "English",
+            "lastUpdated": "2025-12-18",
+            "features": [
+                "45 hours video",
+                "220 lessons",
+                "Certificate",
+                "Jupyter notebooks",
+                "Real datasets"
+            ],
+            "requirements": [
+                "No programming experience needed",
+                "Basic math knowledge"
+            ],
+            "whatYouLearn": [
+                "Python Programming",
+                "NumPy & Pandas",
+                "Data Visualization",
+                "Machine Learning Basics"
+            ],
+            "curriculum": []
+        },
+        {
+            "id": "live-1",
+            "slug": "business-strategy-workshop-2026",
+            "title": "Business Strategy Workshop 2026",
+            "description": "An intensive live workshop on modern business strategy. Learn from industry experts in real-time with interactive sessions, case studies, and Q&A.",
+            "shortDescription": "Live intensive workshop on modern business strategy.",
+            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
+            "price": 199.99,
+            "originalPrice": 299.99,
+            "rating": 4.9,
+            "reviewCount": 89,
+            "enrolledCount": 156,
+            "category": "Business",
+            "level": "Intermediate",
+            "type": "live",
+            "instructorId": "inst-4",
+            "totalHours": 12,
+            "lessonsCount": 8,
+            "language": "English",
+            "lastUpdated": "2025-12-28",
+            "features": [
+                "12 hours live sessions",
+                "8 interactive sessions",
+                "Certificate",
+                "Recording access",
+                "1-on-1 feedback"
+            ],
+            "requirements": [
+                "Business fundamentals",
+                "2+ years work experience preferred"
+            ],
+            "whatYouLearn": [
+                "Strategic Planning",
+                "Market Analysis",
+                "Competitive Strategy",
+                "Business Models"
+            ],
+            "maxStudents": 50,
+            "currentStudents": 38,
+            "startDate": "2026-01-15",
+            "endDate": "2026-02-15",
+            "schedule": [
+                {
+                    "id": "ses-1",
+                    "title": "Introduction to Strategic Thinking",
+                    "date": "2026-01-15",
+                    "startTime": "10:00",
+                    "endTime": "11:30",
+                    "status": "upcoming"
+                },
+                {
+                    "id": "ses-2",
+                    "title": "Market Analysis Deep Dive",
+                    "date": "2026-01-18",
+                    "startTime": "10:00",
+                    "endTime": "11:30",
+                    "status": "upcoming"
+                },
+                {
+                    "id": "ses-3",
+                    "title": "Competitive Positioning",
+                    "date": "2026-01-22",
+                    "startTime": "10:00",
+                    "endTime": "11:30",
+                    "status": "upcoming"
+                },
+                {
+                    "id": "ses-4",
+                    "title": "Business Model Innovation",
+                    "date": "2026-01-25",
+                    "startTime": "10:00",
+                    "endTime": "11:30",
+                    "status": "upcoming"
+                }
+            ]
+        },
+        {
+            "id": "live-2",
+            "slug": "advanced-figma-prototyping-live",
+            "title": "Advanced Figma Prototyping - Live Course",
+            "description": "Master advanced Figma prototyping techniques in this live course. Build complex interactions, animations, and design systems with real-time instructor guidance.",
+            "shortDescription": "Live course on advanced Figma prototyping techniques.",
+            "thumbnail": "https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=800&q=80",
+            "price": 149.99,
+            "originalPrice": 199.99,
+            "rating": 4.8,
+            "reviewCount": 67,
+            "enrolledCount": 124,
+            "category": "Design",
+            "level": "Advanced",
+            "type": "live",
+            "instructorId": "inst-2",
+            "totalHours": 8,
+            "lessonsCount": 6,
+            "language": "English",
+            "lastUpdated": "2025-12-25",
+            "features": [
+                "8 hours live sessions",
+                "6 sessions",
+                "Certificate",
+                "Figma files",
+                "Slack community access"
+            ],
+            "requirements": [
+                "Figma basics",
+                "UI design experience"
+            ],
+            "whatYouLearn": [
+                "Advanced Prototyping",
+                "Micro-interactions",
+                "Design Systems",
+                "Component Variants"
+            ],
+            "maxStudents": 30,
+            "currentStudents": 22,
+            "startDate": "2026-01-20",
+            "endDate": "2026-02-03",
+            "schedule": [
+                {
+                    "id": "ses-1",
+                    "title": "Advanced Components & Variants",
+                    "date": "2026-01-20",
+                    "startTime": "14:00",
+                    "endTime": "15:30",
+                    "status": "upcoming"
+                },
+                {
+                    "id": "ses-2",
+                    "title": "Smart Animate Mastery",
+                    "date": "2026-01-23",
+                    "startTime": "14:00",
+                    "endTime": "15:30",
+                    "status": "upcoming"
+                },
+                {
+                    "id": "ses-3",
+                    "title": "Interactive Prototypes",
+                    "date": "2026-01-27",
+                    "startTime": "14:00",
+                    "endTime": "15:30",
+                    "status": "upcoming"
+                }
+            ]
+        },
+        {
+            "id": "live-3",
+            "slug": "public-speaking-confidence",
+            "title": "Public Speaking & Confidence Building",
+            "description": "Overcome your fear of public speaking and develop confidence in this interactive live course. Practice in a supportive environment with expert feedback.",
+            "shortDescription": "Build confidence and master public speaking skills.",
+            "thumbnail": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80",
+            "price": 129.99,
+            "originalPrice": 179.99,
+            "rating": 4.9,
+            "reviewCount": 234,
+            "enrolledCount": 567,
+            "category": "Personal Growth",
+            "level": "Beginner",
+            "type": "live",
+            "instructorId": "inst-5",
+            "totalHours": 10,
+            "lessonsCount": 5,
+            "language": "English",
+            "lastUpdated": "2025-12-22",
+            "features": [
+                "10 hours live sessions",
+                "5 sessions",
+                "Certificate",
+                "Practice exercises",
+                "Personalized feedback"
+            ],
+            "requirements": [
+                "No prior experience needed",
+                "Willingness to practice"
+            ],
+            "whatYouLearn": [
+                "Overcoming Stage Fright",
+                "Storytelling Techniques",
+                "Body Language",
+                "Voice Modulation"
+            ],
+            "maxStudents": 25,
+            "currentStudents": 18,
+            "startDate": "2026-01-10",
+            "endDate": "2026-01-31",
+            "schedule": [
+                {
+                    "id": "ses-1",
+                    "title": "Understanding Your Fear",
+                    "date": "2026-01-10",
+                    "startTime": "18:00",
+                    "endTime": "20:00",
+                    "status": "upcoming"
+                },
+                {
+                    "id": "ses-2",
+                    "title": "Crafting Your Message",
+                    "date": "2026-01-17",
+                    "startTime": "18:00",
+                    "endTime": "20:00",
+                    "status": "upcoming"
+                }
+            ]
+        }
+    ]
+}

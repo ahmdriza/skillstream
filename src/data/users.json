@@ -1,0 +1,105 @@
+{
+    "users": [
+        {
+            "id": "user-1",
+            "name": "Alex Johnson",
+            "email": "alex@example.com",
+            "password": "demo123",
+            "avatar": "https://images.unsplash.com/photo-1599566150163-29194dcabd36?w=200&q=80",
+            "role": "student",
+            "headline": "Software Developer",
+            "bio": "Passionate about learning new technologies and building great products.",
+            "createdAt": "2025-06-15"
+        },
+        {
+            "id": "user-2",
+            "name": "Sarah Williams",
+            "email": "sarah@example.com",
+            "password": "demo123",
+            "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
+            "role": "teacher",
+            "headline": "Professional Instructor",
+            "bio": "Experienced educator with a passion for helping others succeed.",
+            "createdAt": "2025-03-10"
+        },
+        {
+            "id": "user-3",
+            "name": "Demo Student",
+            "email": "student@demo.com",
+            "password": "demo123",
+            "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&q=80",
+            "role": "student",
+            "headline": "Learning Enthusiast",
+            "bio": "Demo student account for testing.",
+            "createdAt": "2025-12-01"
+        },
+        {
+            "id": "user-4",
+            "name": "Demo Teacher",
+            "email": "teacher@demo.com",
+            "password": "demo123",
+            "avatar": "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=200&q=80",
+            "role": "teacher",
+            "headline": "Course Creator",
+            "bio": "Demo teacher account for testing.",
+            "createdAt": "2025-12-01"
+        }
+    ],
+    "enrollments": [
+        {
+            "id": "enroll-1",
+            "courseId": "rec-1",
+            "userId": "user-1",
+            "enrolledAt": "2025-11-15",
+            "progress": 35,
+            "lastAccessed": "2025-12-28",
+            "completedLessons": [
+                "les-1",
+                "les-2",
+                "les-3",
+                "les-4"
+            ]
+        },
+        {
+            "id": "enroll-2",
+            "courseId": "rec-2",
+            "userId": "user-1",
+            "enrolledAt": "2025-10-20",
+            "progress": 75,
+            "lastAccessed": "2025-12-27",
+            "completedLessons": [
+                "les-1",
+                "les-2"
+            ]
+        },
+        {
+            "id": "enroll-3",
+            "courseId": "live-1",
+            "userId": "user-1",
+            "enrolledAt": "2025-12-20",
+            "progress": 0,
+            "lastAccessed": "2025-12-25",
+            "completedLessons": []
+        },
+        {
+            "id": "enroll-4",
+            "courseId": "rec-3",
+            "userId": "user-3",
+            "enrolledAt": "2025-12-01",
+            "progress": 30,
+            "lastAccessed": "2025-12-28",
+            "completedLessons": []
+        }
+    ],
+    "certificates": [
+        {
+            "id": "cert-1",
+            "courseId": "rec-2",
+            "courseName": "Complete UI/UX Design Masterclass",
+            "userId": "user-1",
+            "userName": "Alex Johnson",
+            "completedAt": "2025-08-15",
+            "certificateUrl": "/certificates/cert-1.pdf"
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+{
+    "instructors": [
+        {
+            "id": "inst-1",
+            "name": "Dr. Angela Yu",
+            "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
+            "title": "Senior Software Engineer & Educator",
+            "bio": "Former lead developer at Google with 12+ years of experience. I've taught over 100,000 students worldwide and I'm passionate about making complex topics simple.",
+            "rating": 4.9,
+            "reviewCount": 15420,
+            "studentsCount": 125000,
+            "coursesCount": 8,
+            "socials": {
+                "twitter": "https://twitter.com/angelayu",
+                "linkedin": "https://linkedin.com/in/angelayu",
+                "website": "https://angelayu.dev"
+            }
+        },
+        {
+            "id": "inst-2",
+            "name": "Gary Simon",
+            "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80",
+            "title": "Product Designer & Figma Expert",
+            "bio": "Award-winning product designer with 15 years of experience. I've worked with Fortune 500 companies and startups alike, leading design teams and building innovative products.",
+            "rating": 4.8,
+            "reviewCount": 8950,
+            "studentsCount": 85000,
+            "coursesCount": 12,
+            "socials": {
+                "twitter": "https://twitter.com/garysimon",
+                "linkedin": "https://linkedin.com/in/garysimon"
+            }
+        },
+        {
+            "id": "inst-3",
+            "name": "Jose Portilla",
+            "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",
+            "title": "Data Scientist & ML Engineer",
+            "bio": "Data scientist with a background in statistics and machine learning. I combine academic rigor with practical industry experience to teach data science effectively.",
+            "rating": 4.7,
+            "reviewCount": 22340,
+            "studentsCount": 250000,
+            "coursesCount": 15,
+            "socials": {
+                "linkedin": "https://linkedin.com/in/joseportilla",
+                "website": "https://joseportilla.com"
+            }
+        },
+        {
+            "id": "inst-4",
+            "name": "Sarah Johnson",
+            "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80",
+            "title": "Business Strategy Consultant",
+            "bio": "Former McKinsey consultant with 10+ years of experience helping Fortune 500 companies develop winning strategies. Harvard MBA graduate.",
+            "rating": 4.9,
+            "reviewCount": 1250,
+            "studentsCount": 8500,
+            "coursesCount": 4,
+            "socials": {
+                "linkedin": "https://linkedin.com/in/sarahjohnson"
+            }
+        },
+        {
+            "id": "inst-5",
+            "name": "Jenny Wilson",
+            "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80",
+            "title": "Communication Coach & TEDx Speaker",
+            "bio": "Professional speaker and communication coach with 8+ years of experience. I've coached executives, entrepreneurs, and professionals to become confident speakers.",
+            "rating": 4.9,
+            "reviewCount": 3420,
+            "studentsCount": 15600,
+            "coursesCount": 6,
+            "socials": {
+                "twitter": "https://twitter.com/jennywilson",
+                "website": "https://jennywilson.co"
+            }
+        }
+    ]
+}

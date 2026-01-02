@@ -1,0 +1,60 @@
+{
+    "categories": [
+        {
+            "id": "cat-1",
+            "name": "Development",
+            "slug": "development",
+            "icon": "IconCode",
+            "coursesCount": 245
+        },
+        {
+            "id": "cat-2",
+            "name": "Design",
+            "slug": "design",
+            "icon": "IconPalette",
+            "coursesCount": 128
+        },
+        {
+            "id": "cat-3",
+            "name": "Business",
+            "slug": "business",
+            "icon": "IconBriefcase",
+            "coursesCount": 95
+        },
+        {
+            "id": "cat-4",
+            "name": "Marketing",
+            "slug": "marketing",
+            "icon": "IconChartLine",
+            "coursesCount": 72
+        },
+        {
+            "id": "cat-5",
+            "name": "Data Science",
+            "slug": "data-science",
+            "icon": "IconChartBar",
+            "coursesCount": 86
+        },
+        {
+            "id": "cat-6",
+            "name": "Personal Growth",
+            "slug": "personal-growth",
+            "icon": "IconUser",
+            "coursesCount": 54
+        },
+        {
+            "id": "cat-7",
+            "name": "Photography",
+            "slug": "photography",
+            "icon": "IconCamera",
+            "coursesCount": 38
+        },
+        {
+            "id": "cat-8",
+            "name": "Music",
+            "slug": "music",
+            "icon": "IconMusic",
+            "coursesCount": 29
+        }
+    ]
+}
