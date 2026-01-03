@@ -1,6 +1,6 @@
 'use client';
 
-import { Tooltip } from '@heroui/react';
+import { Tooltip } from '@mui/material';
 import {
     IconTrophy,
     IconFlame,
@@ -53,9 +53,9 @@ export function AchievementBadge({
     const Icon = iconMap[achievement.icon] || IconTrophy;
     const dimensions = sizeMap[size];
 
-    // Map Mantine colors to Tailwind classes
+    // Map colors to Tailwind classes
     const getColorClasses = (color: string, isEarned: boolean) => {
-        if (!isEarned) return 'bg-default-100 text-default-300';
+        if (!isEarned) return 'bg-gray-100 text-gray-300';
 
         switch (color) {
             case 'yellow': return 'bg-yellow-100 text-yellow-600';
@@ -64,7 +64,7 @@ export function AchievementBadge({
             case 'green': return 'bg-green-100 text-green-600';
             case 'violet': return 'bg-purple-100 text-purple-600';
             case 'orange': return 'bg-orange-100 text-orange-600';
-            default: return 'bg-primary-100 text-primary-600';
+            default: return 'bg-blue-100 text-blue-600';
         }
     };
 
@@ -85,27 +85,27 @@ export function AchievementBadge({
 
     const tooltipContent = (
         <div className="flex flex-col gap-1 px-1 py-1">
-            <span className="font-bold text-small">{achievement.name}</span>
-            <span className="text-tiny text-default-400">{achievement.description}</span>
+            <span className="font-bold text-sm">{achievement.name}</span>
+            <span className="text-xs text-gray-300">{achievement.description}</span>
             {achievement.earnedAt && (
-                <span className="text-tiny text-default-400 pt-1">Earned: {achievement.earnedAt}</span>
+                <span className="text-xs text-gray-400 pt-1">Earned: {achievement.earnedAt}</span>
             )}
         </div>
     );
 
     if (!showLabel) {
         return (
-            <Tooltip content={tooltipContent} delay={0} closeDelay={0}>
+            <Tooltip title={tooltipContent} arrow>
                 {badge}
             </Tooltip>
         );
     }
 
     return (
-        <Tooltip content={achievement.description} delay={0} closeDelay={0}>
+        <Tooltip title={achievement.description} arrow>
             <div className="flex flex-col gap-2 items-center">
                 {badge}
-                <span className={`text-xs text-center font-medium max-w-[80px] truncate ${achievement.isEarned ? 'text-default-700' : 'text-default-400'}`}>
+                <span className={`text-xs text-center font-medium max-w-[80px] truncate ${achievement.isEarned ? 'text-gray-700' : 'text-gray-400'}`}>
                     {achievement.name}
                 </span>
             </div>

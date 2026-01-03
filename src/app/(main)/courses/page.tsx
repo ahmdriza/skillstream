@@ -3,24 +3,25 @@
 import { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { Input } from '@/components/ui/Input';
 import {
-    Input,
     Select,
-    SelectItem,
-    Button,
+    MenuItem,
     Chip,
-    Spinner
-} from '@heroui/react';
+    CircularProgress,
+    Box,
+    FormControl,
+    InputLabel
+} from '@mui/material';
+import { Button } from '@/components/ui/Button';
 import {
     IconSearch,
     IconLayoutGrid,
     IconList,
-    IconX,
 } from '@tabler/icons-react';
 import coursesData from '@/data/courses.json';
 import instructorsData from '@/data/instructors.json';
 import categoriesData from '@/data/categories.json';
-import { CourseCard } from '@/components/courses/CourseCard';
 import { CourseGrid } from '@/components/courses/CourseGrid';
 import { CourseFilter, type FilterState } from '@/components/courses/CourseFilter';
 import { Header } from '@/components/layout/Header';
@@ -48,9 +49,6 @@ function CourseCatalogContent() {
     const courses = coursesData.courses as Course[];
     const instructors = instructorsData.instructors as Instructor[];
     const categories = categoriesData.categories as Category[];
-
-    const getInstructor = (instructorId: string) =>
-        instructors.find((i) => i.id === instructorId);
 
     // Filter courses
     const filteredCourses = courses.filter((course) => {
@@ -114,16 +112,16 @@ function CourseCatalogContent() {
         filters.courseType !== 'all' || filters.category || filters.levels.length > 0 || searchQuery || filters.rating > 0;
 
     return (
-        <div className="min-h-screen flex flex-col bg-default-50 font-sans">
+        <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
             <Header />
 
             <div className="flex-1 container mx-auto px-6 py-8">
                 {/* Breadcrumb */}
-                <div className="text-small text-default-500 mb-2">
+                <div className="text-small text-gray-500 mb-2">
                     Home {'>'} Courses
                 </div>
                 <h1 className="text-3xl font-bold mb-2">Explore Our Catalog</h1>
-                <p className="text-default-500 mb-8 max-w-2xl">
+                <p className="text-gray-500 mb-8 max-w-2xl">
                     Master new skills with self-paced videos or join live expert-led sessions.
                     Choose the format that fits your learning style.
                 </p>
@@ -141,41 +139,39 @@ function CourseCatalogContent() {
                     {/* Course Grid */}
                     <div className="col-span-1 md:col-span-3">
                         {/* Toolbar */}
-                        <div className="bg-background border border-default-200 rounded-medium p-4 mb-6 flex flex-col md:flex-row gap-4 justify-between items-center shadow-sm">
+                        <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6 flex flex-col md:flex-row gap-4 justify-between items-center shadow-sm">
                             <Input
                                 placeholder="Search courses..."
                                 startContent={<IconSearch size={16} />}
                                 value={searchQuery}
                                 onValueChange={setSearchQuery}
                                 className="w-full md:max-w-xs"
-                                variant="bordered"
-                                size="sm"
+                                variant="outlined"
+                                size="small"
                             />
 
                             <div className="flex gap-4 items-center w-full md:w-auto">
-                                <Select
-                                    aria-label="Sort by"
-                                    placeholder="Sort by"
-                                    defaultSelectedKeys={['popular']}
-                                    selectedKeys={[sortBy]}
-                                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setSortBy(e.target.value)}
-                                    className="w-40"
-                                    size="sm"
-                                    variant="bordered"
-                                >
-                                    <SelectItem key="popular">Most Popular</SelectItem>
-                                    <SelectItem key="rating">Highest Rated</SelectItem>
-                                    <SelectItem key="newest">Newest</SelectItem>
-                                    <SelectItem key="price-low">Price: Low to High</SelectItem>
-                                    <SelectItem key="price-high">Price: High to Low</SelectItem>
-                                </Select>
+                                <FormControl size="small" className="w-40" variant="outlined">
+                                    <InputLabel>Sort by</InputLabel>
+                                    <Select
+                                        label="Sort by"
+                                        value={sortBy}
+                                        onChange={(e) => setSortBy(e.target.value)}
+                                    >
+                                        <MenuItem value="popular">Most Popular</MenuItem>
+                                        <MenuItem value="rating">Highest Rated</MenuItem>
+                                        <MenuItem value="newest">Newest</MenuItem>
+                                        <MenuItem value="price-low">Price: Low to High</MenuItem>
+                                        <MenuItem value="price-high">Price: High to Low</MenuItem>
+                                    </Select>
+                                </FormControl>
 
-                                <div className="border border-default-200 rounded-lg p-1 flex">
+                                <div className="border border-gray-200 rounded-lg p-1 flex">
                                     <Button
                                         isIconOnly
                                         size="sm"
-                                        variant={viewMode === 'grid' ? "solid" : "light"}
-                                        color={viewMode === 'grid' ? "primary" : "default"}
+                                        variant={viewMode === 'grid' ? "contained" : "text"}
+                                        color={viewMode === 'grid' ? "primary" : "inherit"}
                                         onPress={() => setViewMode('grid')}
                                     >
                                         <IconLayoutGrid size={16} />
@@ -183,8 +179,8 @@ function CourseCatalogContent() {
                                     <Button
                                         isIconOnly
                                         size="sm"
-                                        variant={viewMode === 'list' ? "solid" : "light"}
-                                        color={viewMode === 'list' ? "primary" : "default"}
+                                        variant={viewMode === 'list' ? "contained" : "text"}
+                                        color={viewMode === 'list' ? "primary" : "inherit"}
                                         onPress={() => setViewMode('list')}
                                     >
                                         <IconList size={16} />
@@ -193,27 +189,23 @@ function CourseCatalogContent() {
                             </div>
                         </div>
 
-                        {/* Active Filters Summary (Mobile mostly, or quick view) */}
+                        {/* Active Filters Summary */}
                         {hasActiveFilters && (
                             <div className="flex flex-wrap gap-2 mb-6 items-center">
                                 {filters.courseType !== 'all' && (
-                                    <Chip onClose={() => setFilters(prev => ({ ...prev, courseType: 'all' }))} variant="flat" color="primary">
-                                        Type: {filters.courseType}
-                                    </Chip>
+                                    <Chip onDelete={() => setFilters(prev => ({ ...prev, courseType: 'all' }))} label={`Type: ${filters.courseType}`} color="primary" variant="outlined" />
                                 )}
                                 {filters.category && (
-                                    <Chip onClose={() => setFilters(prev => ({ ...prev, category: '' }))} variant="flat" color="secondary">
-                                        Cat: {categories.find(c => c.slug === filters.category)?.name || filters.category}
-                                    </Chip>
+                                    <Chip onDelete={() => setFilters(prev => ({ ...prev, category: '' }))} label={`Cat: ${categories.find(c => c.slug === filters.category)?.name || filters.category}`} color="secondary" variant="outlined" />
                                 )}
-                                <Button size="sm" variant="light" color="danger" onPress={clearFilters}>
+                                <Button size="sm" variant="text" color="error" onPress={clearFilters}>
                                     Clear all
                                 </Button>
                             </div>
                         )}
 
                         {/* Results */}
-                        <div className="text-small text-default-500 mb-6">
+                        <div className="text-small text-gray-500 mb-6">
                             Showing {sortedCourses.length} of {courses.length} courses
                         </div>
 
@@ -224,10 +216,10 @@ function CourseCatalogContent() {
                                 viewMode={viewMode}
                             />
                         ) : (
-                            <div className="flex flex-col items-center justify-center p-12 border border-dashed border-default-300 rounded-medium bg-background text-center">
+                            <div className="flex flex-col items-center justify-center p-12 border border-dashed border-gray-300 rounded-lg bg-white text-center">
                                 <h3 className="text-lg font-semibold mb-2">No courses found</h3>
-                                <p className="text-default-500 mb-4">Try adjusting your filters or search query</p>
-                                <Button variant="flat" onPress={clearFilters}>
+                                <p className="text-gray-500 mb-4">Try adjusting your filters or search query</p>
+                                <Button variant="outlined" onPress={clearFilters}>
                                     Clear Filters
                                 </Button>
                             </div>
@@ -245,7 +237,7 @@ export default function CourseCatalogPage() {
     return (
         <Suspense fallback={
             <div className="flex h-screen w-full items-center justify-center">
-                <Spinner size="lg" />
+                <CircularProgress size="lg" />
             </div>
         }>
             <CourseCatalogContent />

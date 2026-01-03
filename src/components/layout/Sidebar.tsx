@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Divider, Listbox, ListboxItem } from '@heroui/react';
+import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box, Typography } from "@mui/material";
 import {
     IconLayoutDashboard,
     IconBook,
@@ -33,70 +33,100 @@ const secondaryItems = [
 export function Sidebar({ onNavigate }: SidebarProps) {
     const pathname = usePathname();
 
-    const IconWrapper = ({ children, className }: { children: React.ReactNode, className?: string }) => (
-        <div className={`flex items-center rounded-small justify-center w-7 h-7 ${className || ""}`}>
-            {children}
-        </div>
-    );
-
     return (
-        <div className="h-full p-4 overflow-y-auto">
-            <Listbox
-                aria-label="Dashboard Navigation"
-                variant="flat"
-                className="p-0 gap-0 divide-y divide-default-300/50 dark:divide-default-100/80 bg-content1 max-w-[300px] overflow-visible shadow-small rounded-medium"
-                itemClasses={{
-                    base: "px-3 first:rounded-t-medium last:rounded-b-medium rounded-none gap-3 h-12 data-[hover=true]:bg-default-100/80",
-                }}
-            >
-                {navItems.map((item) => (
-                    <ListboxItem
-                        key={item.href}
-                        href={item.href}
-                        onPress={onNavigate}
-                        startContent={
-                            <IconWrapper className="bg-primary/10 text-primary">
-                                <item.icon size={20} />
-                            </IconWrapper>
-                        }
-                        className={pathname === item.href ? "bg-primary/10 text-primary font-medium" : "text-default-500"}
-                    >
-                        <Link href={item.href} className="w-full h-full flex items-center">
-                            {item.label}
-                        </Link>
-                    </ListboxItem>
-                ))}
-            </Listbox>
+        <Box sx={{ height: '100%', p: 2, overflowY: 'auto' }}>
+            <Box sx={{
+                width: '100%',
+                bgcolor: 'background.paper',
+                borderRadius: 2,
+                boxShadow: 1,
+                overflow: 'hidden'
+            }}>
+                <List component="nav" sx={{ p: 0 }}>
+                    {navItems.map((item) => (
+                        <ListItem key={item.href} disablePadding>
+                            <ListItemButton
+                                selected={pathname === item.href}
+                                onClick={onNavigate}
+                                component={Link}
+                                href={item.href}
+                                sx={{
+                                    '&.Mui-selected': {
+                                        bgcolor: 'primary.light',
+                                        color: 'primary.main',
+                                        '&:hover': {
+                                            bgcolor: 'primary.light',
+                                        },
+                                        '& .MuiListItemIcon-root': {
+                                            color: 'primary.main',
+                                        }
+                                    },
+                                    py: 1.5
+                                }}
+                            >
+                                <ListItemIcon sx={{ minWidth: 40, color: pathname === item.href ? 'primary.main' : 'text.secondary' }}>
+                                    <item.icon size={20} />
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary={item.label}
+                                    primaryTypographyProps={{
+                                        fontWeight: pathname === item.href ? 600 : 400,
+                                        fontSize: '0.95rem'
+                                    }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Box>
 
-            <Divider className="my-4" />
+            <Divider sx={{ my: 2 }} />
 
-            <div className="px-2 mb-2 text-xs font-semibold text-default-400 uppercase">
+            <Typography variant="overline" sx={{ px: 2, mb: 1, display: 'block', color: 'text.secondary', fontWeight: 600 }}>
                 Account
-            </div>
+            </Typography>
 
-            <Listbox
-                aria-label="Account Settings"
-                variant="flat"
-                className="p-0 gap-0 divide-y divide-default-300/50 dark:divide-default-100/80 bg-content1 max-w-[300px] overflow-visible shadow-small rounded-medium"
-            >
-                {secondaryItems.map((item) => (
-                    <ListboxItem
-                        key={item.href}
-                        href={item.href}
-                        onPress={onNavigate}
-                        startContent={
-                            <IconWrapper className="bg-warning/10 text-warning">
-                                <item.icon size={20} />
-                            </IconWrapper>
-                        }
-                        className={pathname === item.href ? "bg-primary/20 text-primary font-medium" : "text-default-500"}
-                    >
-                        <Link href={item.href} className="w-full h-full flex items-center">
-                            {item.label}
-                        </Link>
-                    </ListboxItem>
-                ))}
-            </Listbox>
-        </div>
+            <Box sx={{
+                width: '100%',
+                bgcolor: 'background.paper',
+                borderRadius: 2,
+                boxShadow: 1,
+                overflow: 'hidden'
+            }}>
+                <List component="nav" sx={{ p: 0 }}>
+                    {secondaryItems.map((item) => (
+                        <ListItem key={item.href} disablePadding>
+                            <ListItemButton
+                                selected={pathname === item.href}
+                                onClick={onNavigate}
+                                component={Link}
+                                href={item.href}
+                                sx={{
+                                    '&.Mui-selected': {
+                                        bgcolor: 'primary.light',
+                                        color: 'primary.main',
+                                        '& .MuiListItemIcon-root': {
+                                            color: 'primary.main',
+                                        }
+                                    },
+                                    py: 1.5
+                                }}
+                            >
+                                <ListItemIcon sx={{ minWidth: 40, color: 'text.secondary' }}>
+                                    <item.icon size={20} />
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary={item.label}
+                                    primaryTypographyProps={{
+                                        fontWeight: pathname === item.href ? 600 : 400,
+                                        fontSize: '0.95rem'
+                                    }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+            </Box>
+        </Box>
     );
 }

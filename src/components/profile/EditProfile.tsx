@@ -1,15 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import {
-    Card,
-    CardBody,
-    Input,
-    Textarea,
-    Button,
-    Avatar,
-    User
-} from '@heroui/react';
+import { Card, CardBody } from '@/components/ui/Card';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { Avatar } from '@mui/material';
 import { IconCamera, IconCheck } from '@tabler/icons-react';
 import type { User as UserType } from '@/types';
 
@@ -50,12 +45,12 @@ export function EditProfile({ user, onSave, onCancel }: EditProfileProps) {
                     {/* Avatar Section */}
                     <div className="flex gap-6 items-start">
                         <div className="relative">
-                            <Avatar src={user.avatar} className="w-24 h-24" />
+                            <Avatar src={user.avatar} sx={{ width: 96, height: 96 }} />
                             <Button
                                 isIconOnly
                                 size="sm"
                                 radius="full"
-                                variant="solid"
+                                variant="contained"
                                 className="absolute bottom-0 right-0 z-10"
                             >
                                 <IconCamera size={14} />
@@ -63,12 +58,12 @@ export function EditProfile({ user, onSave, onCancel }: EditProfileProps) {
                         </div>
                         <div className="flex flex-col gap-1">
                             <span className="font-semibold text-medium">Profile Picture</span>
-                            <span className="text-tiny text-default-400 mb-2">
+                            <span className="text-tiny text-gray-400 mb-2">
                                 PNG or JPG, max 800px wide
                             </span>
                             <div className="flex gap-2">
-                                <Button size="sm" variant="flat">Upload New</Button>
-                                <Button size="sm" variant="light" color="danger">
+                                <Button size="sm" variant="outlined">Upload New</Button>
+                                <Button size="sm" variant="text" color="error">
                                     Remove
                                 </Button>
                             </div>
@@ -83,7 +78,7 @@ export function EditProfile({ user, onSave, onCancel }: EditProfileProps) {
                             value={formData.name}
                             onValueChange={(val) => handleChange('name', val)}
                             isRequired
-                            variant="bordered"
+                            variant="outlined"
                         />
                         <Input
                             label="Email"
@@ -91,8 +86,8 @@ export function EditProfile({ user, onSave, onCancel }: EditProfileProps) {
                             placeholder="your@email.com"
                             value={formData.email}
                             onValueChange={(val) => handleChange('email', val)}
-                            isDisabled
-                            variant="bordered"
+                            disabled // MUI is disabled, HeroUI isDisabled
+                            variant="outlined"
                         />
                     </div>
 
@@ -101,21 +96,22 @@ export function EditProfile({ user, onSave, onCancel }: EditProfileProps) {
                         placeholder="e.g., Software Developer at Company"
                         value={formData.headline}
                         onValueChange={(val) => handleChange('headline', val)}
-                        variant="bordered"
+                        variant="outlined"
                     />
 
-                    <Textarea
+                    <Input
                         label="Bio"
                         placeholder="Tell us about yourself..."
                         value={formData.bio}
                         onValueChange={(val) => handleChange('bio', val)}
-                        minRows={4}
-                        variant="bordered"
+                        multiline
+                        rows={4}
+                        variant="outlined"
                     />
 
                     {/* Actions */}
                     <div className="flex justify-end gap-2 mt-2">
-                        <Button variant="light" onPress={onCancel} isDisabled={saving}>
+                        <Button variant="text" onPress={onCancel} disabled={saving}>
                             Cancel
                         </Button>
                         <Button

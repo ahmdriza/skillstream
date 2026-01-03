@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardBody } from '@heroui/react';
+import { Card, CardBody } from '@/components/ui/Card';
 import { ReactNode } from 'react';
 
 interface StatCardProps {

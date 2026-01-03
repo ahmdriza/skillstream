@@ -1,13 +1,13 @@
 'use client';
 
-import { Progress } from '@heroui/react';
+import { LinearProgress, Box, Typography } from '@mui/material';
 
 interface ProgressBarProps {
     value: number;
     label?: string;
     showPercentage?: boolean;
     size?: 'sm' | 'md' | 'lg';
-    color?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+    color?: "primary" | "secondary" | "success" | "warning" | "error" | "info" | "inherit";
     animate?: boolean;
 }
 
@@ -20,22 +20,23 @@ export function ProgressBar({
     animate = false,
 }: ProgressBarProps) {
     return (
-        <Progress
-            label={label}
-            size={size}
-            value={value}
-            maxValue={100}
-            color={color}
-            showValueLabel={showPercentage}
-            classNames={{
-                base: "w-full",
-                track: "drop-shadow-md border border-default",
-                indicator: animate ? "bg-gradient-to-r from-pink-500 to-yellow-500" : "",
-                label: "tracking-wider font-medium text-default-600",
-                value: "text-foreground/60"
-            }}
-            isIndeterminate={animate && value === 0} // Or use customized animation class
-        />
+        <Box sx={{ width: '100%' }}>
+            {(label || showPercentage) && (
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    {label && <Typography variant="body2" color="text.secondary" fontWeight={500}>{label}</Typography>}
+                    {showPercentage && <Typography variant="body2" color="text.secondary">{Math.round(value)}%</Typography>}
+                </Box>
+            )}
+            <LinearProgress
+                variant={animate && value === 0 ? "indeterminate" : "determinate"}
+                value={value}
+                color={color as any}
+                sx={{
+                    height: size === 'sm' ? 4 : size === 'md' ? 8 : 12,
+                    borderRadius: 5
+                }}
+            />
+        </Box>
     );
 }
 
@@ -43,17 +44,13 @@ export function ProgressBar({
 interface MultiProgressBarProps {
     sections: Array<{
         value: number;
-        color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+        color: string;
         label?: string;
     }>;
     size?: 'sm' | 'md' | 'lg';
 }
 
 export function MultiProgressBar({ sections, size = 'md' }: MultiProgressBarProps) {
-    // HeroUI doesn't support multi-section progress natively in one bar easily without custom CSS.
-    // We will render stacked progress bars or a flex container.
-    // A flex container is better for "multi-colored bar".
-
     return (
         <div className="flex flex-col gap-2 w-full">
             <div className={`flex w-full overflow-hidden rounded-full ${size === 'sm' ? 'h-1' : size === 'md' ? 'h-3' : 'h-5'}`}>
@@ -61,26 +58,31 @@ export function MultiProgressBar({ sections, size = 'md' }: MultiProgressBarProp
                     <div
                         key={index}
                         style={{ width: `${section.value}%` }}
-                        className={`h-full bg-${section.color === 'default' ? 'gray-500' :
-                            section.color === 'primary' ? 'blue-500' :
-                                section.color === 'success' ? 'green-500' :
-                                    section.color === 'warning' ? 'yellow-500' :
-                                        section.color === 'danger' ? 'red-500' : 'purple-500'}`}
+                        className={`h-full bg-${getTailwindColor(section.color)}`}
                     />
                 ))}
             </div>
             <div className="flex gap-4">
                 {sections.map((section, index) => (
                     <div className="flex gap-2 items-center" key={index}>
-                        <div className={`w-2 h-2 rounded-full bg-${section.color === 'default' ? 'gray-500' :
-                            section.color === 'primary' ? 'blue-500' :
-                                section.color === 'success' ? 'green-500' :
-                                    section.color === 'warning' ? 'yellow-500' :
-                                        section.color === 'danger' ? 'red-500' : 'purple-500'}`} />
-                        <span className="text-xs text-default-500">{section.label}</span>
+                        <div className={`w-2 h-2 rounded-full bg-${getTailwindColor(section.color)}`} />
+                        <span className="text-xs text-gray-500">{section.label}</span>
                     </div>
                 ))}
             </div>
         </div>
     );
+}
+
+function getTailwindColor(color: string) {
+    const map: any = {
+        default: 'gray-500',
+        primary: 'blue-500',
+        success: 'green-500',
+        warning: 'yellow-500',
+        danger: 'red-500',
+        error: 'red-500',
+        purple: 'purple-500'
+    };
+    return map[color] || 'blue-500';
 }

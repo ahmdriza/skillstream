@@ -1,15 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import {
-    Card,
-    CardBody,
-    Button,
-    Chip,
-    Avatar,
-    Progress,
-    AvatarGroup,
-} from '@heroui/react';
+import { Card, CardBody } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Chip, Avatar, AvatarGroup, LinearProgress } from '@mui/material';
 import {
     IconClock,
     IconTrophy,
@@ -71,17 +65,17 @@ export default function DashboardPage() {
             {/* Welcome Header */}
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl md:text-3xl font-bold text-foreground">
+                    <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
                         Welcome back, {user?.name?.split(' ')[0] || 'Alex'}! 👋
                     </h1>
-                    <p className="text-default-500 mt-1">
+                    <p className="text-gray-500 mt-1">
                         You have 2 upcoming classes and 1 assignment due today.
                     </p>
                 </div>
                 <Button
                     as={Link}
                     href="/profile"
-                    variant="flat"
+                    variant="outlined"
                     color="primary"
                     className="shrink-0"
                 >
@@ -128,18 +122,26 @@ export default function DashboardPage() {
                                         className="w-full h-full object-cover"
                                     />
                                     <div className="absolute top-3 left-3">
-                                        <Chip color="danger" variant="solid" size="sm" className="font-bold">
-                                            LIVE NOW
-                                        </Chip>
+                                        <Chip
+                                            label="LIVE NOW"
+                                            color="error"
+                                            variant="filled"
+                                            size="small"
+                                            sx={{ fontWeight: 'bold' }}
+                                        />
                                     </div>
                                 </div>
                                 <div className="flex-1 p-5 flex flex-col gap-3">
-                                    <Chip color="primary" variant="flat" size="sm" className="w-fit">
-                                        Live Class
-                                    </Chip>
+                                    <Chip
+                                        label="Live Class"
+                                        color="primary"
+                                        variant="outlined"
+                                        size="small"
+                                        sx={{ width: 'fit-content' }}
+                                    />
                                     <div>
                                         <h3 className="text-xl font-bold">Advanced UX Strategy Workshop</h3>
-                                        <p className="text-small text-default-500 line-clamp-2 mt-1">
+                                        <p className="text-small text-gray-500 line-clamp-2 mt-1">
                                             Join instructor Sarah Jenks for a deep dive into stakeholder mapping and strategy.
                                         </p>
                                     </div>
@@ -164,7 +166,7 @@ export default function DashboardPage() {
                             <Button
                                 as={Link}
                                 href="/dashboard/courses"
-                                variant="light"
+                                variant="text"
                                 color="primary"
                                 endContent={<IconChevronRight size={16} />}
                                 className="font-medium"
@@ -191,22 +193,22 @@ export default function DashboardPage() {
                     <div className="space-y-4">
                         <h3 className="text-lg font-bold">Upcoming Classes</h3>
                         <div className="space-y-3">
-                            <Card shadow="sm" className="border-l-4 border-l-primary">
+                            <Card shadow="sm" className="border-l-4 border-l-blue-500">
                                 <CardBody className="p-3 flex flex-row gap-3">
-                                    <div className="bg-default-100 rounded-lg p-2 flex flex-col items-center justify-center min-w-[3.5rem] h-14">
-                                        <span className="text-[10px] font-bold text-default-500 uppercase">Jan</span>
-                                        <span className="text-lg font-bold text-foreground">04</span>
+                                    <div className="bg-gray-100 rounded-lg p-2 flex flex-col items-center justify-center min-w-[3.5rem] h-14">
+                                        <span className="text-[10px] font-bold text-gray-500 uppercase">Jan</span>
+                                        <span className="text-lg font-bold text-gray-900">04</span>
                                     </div>
                                     <div className="flex flex-col gap-1 min-w-0">
-                                        <span className="text-tiny font-bold text-primary">10:00 AM - 11:30 AM</span>
+                                        <span className="text-tiny font-bold text-blue-600">10:00 AM - 11:30 AM</span>
                                         <span className="text-small font-bold truncate">Advanced UX Strategy</span>
                                         <div className="flex items-center gap-2 mt-1">
-                                            <AvatarGroup size="sm" max={3} isBordered>
+                                            <AvatarGroup sx={{ '& .MuiAvatar-root': { width: 24, height: 24, fontSize: 12 } }} max={3}>
                                                 <Avatar src="https://i.pravatar.cc/100?img=5" />
                                                 <Avatar src="https://i.pravatar.cc/100?img=6" />
                                                 <Avatar src="https://i.pravatar.cc/100?img=7" />
                                             </AvatarGroup>
-                                            <span className="text-tiny text-default-400">joining</span>
+                                            <span className="text-tiny text-gray-400">joining</span>
                                         </div>
                                     </div>
                                 </CardBody>
@@ -228,14 +230,17 @@ export default function DashboardPage() {
                                 <span className="text-2xl font-bold">4/5</span>
                                 <span className="text-small opacity-80 mb-1">lessons</span>
                             </div>
-                            <Progress
+                            <LinearProgress
+                                variant="determinate"
                                 value={80}
-                                size="sm"
-                                classNames={{
-                                    indicator: "bg-yellow-400",
-                                    track: "bg-white/20"
+                                sx={{
+                                    height: 8,
+                                    borderRadius: 2,
+                                    backgroundColor: 'rgba(255,255,255,0.2)',
+                                    '& .MuiLinearProgress-bar': {
+                                        backgroundColor: '#fbbf24' // yellow-400
+                                    }
                                 }}
-                                aria-label="Weekly Goal Progress"
                             />
                             <p className="text-tiny mt-3 opacity-90">
                                 Keep it up! Just one more lesson to hit your weekly target.

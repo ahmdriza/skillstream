@@ -1,13 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import {
-    Card,
-    CardBody,
-    CardHeader,
-    Button,
-    Badge
-} from '@heroui/react';
+import { Card, CardBody, CardHeader } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import type { LiveSession } from '@/types';
 
@@ -78,13 +73,13 @@ export function SessionCalendar({ sessions = [], onSessionClick }: SessionCalend
     return (
         <Card className="max-w-md w-full">
             <CardHeader className="flex justify-between items-center px-4 py-3">
-                <Button isIconOnly variant="light" onPress={goToPreviousMonth} size="sm">
+                <Button isIconOnly variant="text" onClick={goToPreviousMonth} size="small">
                     <IconChevronLeft size={18} />
                 </Button>
                 <div className="font-semibold text-medium">
                     {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
                 </div>
-                <Button isIconOnly variant="light" onPress={goToNextMonth} size="sm">
+                <Button isIconOnly variant="text" onClick={goToNextMonth} size="small">
                     <IconChevronRight size={18} />
                 </Button>
             </CardHeader>
@@ -93,7 +88,7 @@ export function SessionCalendar({ sessions = [], onSessionClick }: SessionCalend
                 {/* Day names */}
                 <div className="grid grid-cols-7 gap-1 mb-2">
                     {dayNames.map((day) => (
-                        <div key={day} className="text-center text-xs text-default-400 font-medium">
+                        <div key={day} className="text-center text-xs text-gray-400 font-medium">
                             {day}
                         </div>
                     ))}
@@ -107,7 +102,7 @@ export function SessionCalendar({ sessions = [], onSessionClick }: SessionCalend
                             className={`
                                 h-8 w-8 flex items-center justify-center rounded-full text-small mx-auto relative
                                 ${!item.day ? 'invisible' : ''}
-                                ${isToday(item.date) ? 'bg-primary text-white font-bold shadow-md' : 'text-default-700 hover:bg-default-100 cursor-pointer'}
+                                ${isToday(item.date) ? 'bg-blue-600 text-white font-bold shadow-md' : 'text-gray-700 hover:bg-gray-100 cursor-pointer'}
                             `}
                             onClick={() => {
                                 if (item.hasSession && item.date) {
@@ -120,7 +115,7 @@ export function SessionCalendar({ sessions = [], onSessionClick }: SessionCalend
                         >
                             {item.day}
                             {item.hasSession && !isToday(item.date) && (
-                                <span className="absolute bottom-0.5 w-1 h-1 bg-danger rounded-full"></span>
+                                <span className="absolute bottom-0.5 w-1 h-1 bg-red-500 rounded-full"></span>
                             )}
                         </div>
                     ))}

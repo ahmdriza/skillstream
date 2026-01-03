@@ -1,11 +1,7 @@
 'use client';
 
-import {
-    Avatar,
-    Card,
-    CardBody,
-    Button
-} from '@heroui/react';
+import { Avatar } from '@mui/material';
+import { Card, CardBody } from '@/components/ui/Card';
 import { IconUsers, IconBook, IconGlobe, IconHeart } from '@tabler/icons-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -33,12 +29,12 @@ export default function AboutPage() {
         <div className="min-h-screen flex flex-col font-sans">
             <Header />
 
-            <div className="flex-1 bg-default-50">
+            <div className="flex-1 bg-gray-50">
                 {/* Hero */}
-                <div className="py-20 bg-background text-center border-b border-default-100">
+                <div className="py-20 bg-white text-center border-b border-gray-200">
                     <div className="container mx-auto px-6">
                         <h1 className="text-4xl font-bold mb-4">About SkillStream</h1>
-                        <p className="text-lg text-default-500 max-w-2xl mx-auto">
+                        <p className="text-lg text-gray-500 max-w-2xl mx-auto">
                             We're on a mission to make quality education accessible to everyone, everywhere.
                             Through live classes and self-paced courses, we're transforming how people learn.
                         </p>
@@ -61,7 +57,7 @@ export default function AboutPage() {
                                     </div>
                                     <div>
                                         <h3 className="text-2xl font-bold">{stat.value}</h3>
-                                        <p className="text-default-500">{stat.label}</p>
+                                        <p className="text-gray-500">{stat.label}</p>
                                     </div>
                                 </CardBody>
                             </Card>
@@ -70,10 +66,10 @@ export default function AboutPage() {
                 </div>
 
                 {/* Mission */}
-                <div className="bg-background py-16">
+                <div className="bg-white py-16">
                     <div className="container mx-auto px-6 text-center">
                         <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-                        <p className="text-xl text-default-500 max-w-3xl mx-auto leading-relaxed">
+                        <p className="text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed">
                             At SkillStream, we believe that learning should be engaging, accessible, and effective.
                             We combine the flexibility of online learning with the engagement of live instruction
                             to create an unparalleled educational experience.
@@ -89,10 +85,10 @@ export default function AboutPage() {
                             <Card key={member.name} shadow="sm" className="text-center">
                                 <CardBody className="py-8">
                                     <div className="flex justify-center mb-4">
-                                        <Avatar src={member.avatar} className="w-24 h-24 text-large" isBordered color="primary" />
+                                        <Avatar src={member.avatar} sx={{ width: 96, height: 96 }} className="text-large" />
                                     </div>
                                     <h3 className="font-bold text-lg">{member.name}</h3>
-                                    <p className="text-default-500">{member.role}</p>
+                                    <p className="text-gray-500">{member.role}</p>
                                 </CardBody>
                             </Card>
                         ))}

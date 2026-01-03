@@ -2,16 +2,19 @@
 
 import {
     Card,
-    CardBody,
+    CardContent,
     CardHeader,
-    CardFooter,
-    Button,
-    Chip,
+    CardActions,
+    Typography,
+    Box,
     Avatar,
-    Link
-} from '@heroui/react';
-import { IconCalendar, IconClock, IconUsers, IconVideo } from '@tabler/icons-react';
+    Chip,
+    Button as MuiButton
+} from '@mui/material';
+import { Button } from '@/components/ui/Button';
+import { IconCalendar, IconClock, IconVideo } from '@tabler/icons-react';
 import type { LiveSession, Instructor } from '@/types';
+import Link from 'next/link';
 
 interface LiveSessionCardProps {
     session: LiveSession & {
@@ -28,47 +31,60 @@ export function LiveSessionCard({ session, instructor, onJoin }: LiveSessionCard
     const isCompleted = session.status === 'completed';
 
     const getStatusChip = () => {
-        if (isLive) return <Chip color="danger" variant="solid" size="sm">🔴 LIVE NOW</Chip>;
-        if (isCompleted) return <Chip color="default" variant="flat" size="sm">Completed</Chip>;
-        return <Chip color="primary" variant="flat" size="sm">Upcoming</Chip>;
+        if (isLive) return <Chip label="🔴 LIVE NOW" color="error" size="small" />;
+        if (isCompleted) return <Chip label="Completed" variant="outlined" size="small" />;
+        return <Chip label="Upcoming" color="primary" variant="outlined" size="small" />;
     };
 
     return (
-        <Card shadow="sm" className="w-full">
-            <CardHeader className="flex justify-between pb-0">
-                {getStatusChip()}
-                <span className="text-small text-default-500">
-                    {session.date}
-                </span>
-            </CardHeader>
-            <CardBody className="gap-3">
-                <div className="flex flex-col gap-1">
-                    <h4 className="font-bold text-large line-clamp-2">{session.title}</h4>
+        <Card sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+            <CardHeader
+                action={getStatusChip()}
+                subheader={session.date}
+                sx={{ pb: 0 }}
+            />
+            <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <Box>
+                    <Typography variant="h6" component="h4" noWrap title={session.title} sx={{ fontWeight: 'bold' }}>
+                        {session.title}
+                    </Typography>
                     {session.courseTitle && (
-                        <span className="text-small text-default-400">{session.courseTitle}</span>
+                        <Typography variant="body2" color="text.secondary">
+                            {session.courseTitle}
+                        </Typography>
                     )}
-                </div>
+                </Box>
 
                 {instructor && (
-                    <div className="flex gap-3 items-center">
-                        <Avatar src={instructor.avatar} size="sm" />
-                        <div className="flex flex-col">
-                            <span className="text-small font-semibold">{instructor.name}</span>
-                            <span className="text-tiny text-default-400">{instructor.title}</span>
-                        </div>
-                    </div>
+                    <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
+                        <Avatar src={instructor.avatar} sx={{ width: 32, height: 32 }} />
+                        <Box>
+                            <Typography variant="subtitle2" sx={{ lineHeight: 1.2 }}>{instructor.name}</Typography>
+                            <Typography variant="caption" color="text.secondary">{instructor.title}</Typography>
+                        </Box>
+                    </Box>
                 )}
 
-                <div className="flex gap-2 text-small text-default-500 items-center bg-default-100 p-2 rounded-medium w-fit">
-                    <IconClock size={16} />
-                    <span>{session.startTime} - {session.endTime}</span>
-                </div>
-            </CardBody>
-            <CardFooter className="pt-0">
+                <Box sx={{
+                    display: 'flex',
+                    gap: 1,
+                    alignItems: 'center',
+                    bgcolor: 'action.hover',
+                    p: 1,
+                    borderRadius: 1,
+                    width: 'fit-content'
+                }}>
+                    <IconClock size={16} className="text-gray-500" />
+                    <Typography variant="caption" color="text.secondary">
+                        {session.startTime} - {session.endTime}
+                    </Typography>
+                </Box>
+            </CardContent>
+            <CardActions sx={{ p: 2, pt: 0 }}>
                 {isLive && (
                     <Button
                         fullWidth
-                        color="danger"
+                        color="error"
                         startContent={<IconVideo size={18} />}
                         onPress={onJoin}
                     >
@@ -80,26 +96,27 @@ export function LiveSessionCard({ session, instructor, onJoin }: LiveSessionCard
                     <Button
                         fullWidth
                         variant="flat"
+                        color="inherit"
                         startContent={<IconCalendar size={18} />}
-                        isDisabled
+                        // @ts-ignore
+                        disabled
                     >
                         Starts at {session.startTime}
                     </Button>
                 )}
 
                 {isCompleted && session.recordingUrl && (
-                    <Button
+                    <MuiButton
                         fullWidth
-                        variant="ghost"
-                        as={Link}
+                        variant="outlined"
+                        component={Link}
                         href={session.recordingUrl}
-                        isExternal
-                        showAnchorIcon={false}
+                        target="_blank"
                     >
                         Watch Recording
-                    </Button>
+                    </MuiButton>
                 )}
-            </CardFooter>
+            </CardActions>
         </Card>
     );
 }

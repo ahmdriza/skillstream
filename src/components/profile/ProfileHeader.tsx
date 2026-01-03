@@ -1,13 +1,8 @@
 'use client';
 
-import {
-    Card,
-    CardBody,
-    Avatar,
-    Chip,
-    Button,
-    Tooltip
-} from '@heroui/react';
+import { Card, CardBody } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Avatar, Chip, Tooltip } from '@mui/material';
 import { IconCamera, IconEdit, IconMail, IconCalendar } from '@tabler/icons-react';
 import type { User } from '@/types';
 
@@ -31,12 +26,11 @@ export function ProfileHeader({
                         <div className="relative">
                             <Avatar
                                 src={user.avatar}
-                                className="w-24 h-24 md:w-32 md:h-32 text-large"
-                                isBordered
+                                sx={{ width: { xs: 96, md: 128 }, height: { xs: 96, md: 128 }, border: '4px solid white', boxShadow: 1 }}
                             />
                             <div className="absolute bottom-0 right-0">
-                                <Tooltip content="Change Avatar">
-                                    <Button isIconOnly size="sm" radius="full" color="primary" variant="solid">
+                                <Tooltip title="Change Avatar">
+                                    <Button isIconOnly size="sm" radius="full" color="primary" variant="contained">
                                         <IconCamera size={14} />
                                     </Button>
                                 </Tooltip>
@@ -48,32 +42,31 @@ export function ProfileHeader({
                             <div className="flex items-center gap-2">
                                 <h2 className="text-2xl font-bold">{user.name}</h2>
                                 <Chip
+                                    label={user.role}
                                     color={user.role === 'teacher' ? 'secondary' : 'primary'}
-                                    variant="flat"
-                                    size="sm"
-                                    className="capitalize"
-                                >
-                                    {user.role}
-                                </Chip>
+                                    variant="outlined"
+                                    size="small"
+                                    sx={{ textTransform: 'capitalize' }}
+                                />
                             </div>
 
                             {user.headline && (
-                                <p className="text-default-500 font-medium">{user.headline}</p>
+                                <p className="text-gray-500 font-medium">{user.headline}</p>
                             )}
 
                             <div className="flex gap-4 mt-2">
-                                <div className="flex gap-1 items-center text-small text-default-400">
+                                <div className="flex gap-1 items-center text-small text-gray-400">
                                     <IconMail size={16} />
                                     <span>{user.email}</span>
                                 </div>
-                                <div className="flex gap-1 items-center text-small text-default-400">
+                                <div className="flex gap-1 items-center text-small text-gray-400">
                                     <IconCalendar size={16} />
                                     <span>Joined {user.createdAt}</span>
                                 </div>
                             </div>
 
                             {user.bio && (
-                                <p className="text-default-500 mt-4 text-small max-w-lg">
+                                <p className="text-gray-500 mt-4 text-small max-w-lg">
                                     {user.bio}
                                 </p>
                             )}
@@ -82,7 +75,7 @@ export function ProfileHeader({
 
                     {showEditButton && (
                         <Button
-                            variant="flat"
+                            variant="outlined"
                             startContent={<IconEdit size={16} />}
                             onPress={onEditClick}
                         >

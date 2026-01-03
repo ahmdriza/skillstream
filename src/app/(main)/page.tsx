@@ -1,7 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Button, Chip, Avatar, AvatarGroup, Card, CardBody } from '@heroui/react';
+import { Button } from '@/components/ui/Button';
+import { Card, CardBody } from '@/components/ui/Card';
+import { Chip, Avatar, AvatarGroup } from '@mui/material';
 import {
   IconPlayerPlay,
   IconUsers,

@@ -3,15 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import {
-    Input,
-    Checkbox,
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Divider
-} from '@heroui/react';
+import { Input } from '@/components/ui/Input';
+import { Checkbox } from '@/components/ui/Checkbox';
+import { Button } from '@/components/ui/Button';
+import { Card, CardBody, CardHeader, Divider } from '@/components/ui/Card';
 import { IconBook, IconBrandGoogle, IconAlertCircle, IconEye, IconEyeOff } from '@tabler/icons-react';
 import { useAuth } from '@/context/AuthContext';
 

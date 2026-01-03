@@ -1,54 +1,51 @@
 'use client';
 
-import { Input as HeroInput, InputProps as HeroInputProps } from "@heroui/react";
-import { forwardRef, useState } from 'react';
-import { IconEye, IconEyeOff } from "@tabler/icons-react";
+import { TextField, TextFieldProps, InputAdornment } from "@mui/material";
+import { forwardRef } from 'react';
 
-export interface InputProps extends HeroInputProps {
-    // Custom props
-}
+export type InputProps = Omit<TextFieldProps, 'variant' | 'size'> & {
+    variant?: "outlined" | "filled" | "standard" | "bordered" | "flat" | "faded";
+    size?: "sm" | "md" | "lg" | "small" | "medium";
+    startContent?: React.ReactNode;
+    endContent?: React.ReactNode;
+    onValueChange?: (value: string) => void;
+    labelPlacement?: "inside" | "outside" | "outside-left";
+    classNames?: any;
+    isRequired?: boolean;
+    description?: string;
+    errorMessage?: string;
+    isInvalid?: boolean;
+    isClearable?: boolean;
+};
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ type = 'text', label, placeholder, ...props }, ref) => {
-        const [isVisible, setIsVisible] = useState(false);
+export const Input = forwardRef<HTMLDivElement, InputProps>(
+    ({ startContent, endContent, onValueChange, onChange, variant = "outlined", size = "md", classNames, isRequired, description, errorMessage, isInvalid, label, ...props }, ref) => {
 
-        if (type === 'password') {
-            const toggleVisibility = () => setIsVisible(!isVisible);
+        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+            if (onChange) onChange(e);
+            if (onValueChange) onValueChange(e.target.value);
+        };
 
-            return (
-                <HeroInput
-                    ref={ref}
-                    label={label}
-                    placeholder={placeholder}
-                    variant="bordered"
-                    labelPlacement="outside"
-                    size="sm"
-                    radius="sm"
-                    endContent={
-                        <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
-                            {isVisible ? (
-                                <IconEyeOff className="text-2xl text-default-400 pointer-events-none" size={20} />
-                            ) : (
-                                <IconEye className="text-2xl text-default-400 pointer-events-none" size={20} />
-                            )}
-                        </button>
-                    }
-                    type={isVisible ? "text" : "password"}
-                    {...props}
-                />
-            );
-        }
+        const muiVariant = variant === "bordered" ? "outlined" : (variant === "flat" ? "filled" : "outlined");
+        const muiSize: "small" | "medium" = size === "sm" ? "small" : "medium";
 
         return (
-            <HeroInput
+            <TextField
                 ref={ref}
-                type={type}
+                variant={muiVariant}
+                size={muiSize}
+                fullWidth
                 label={label}
-                placeholder={placeholder}
-                variant="bordered"
-                labelPlacement="outside"
-                size="sm"
-                radius="sm"
+                required={isRequired}
+                onChange={handleChange}
+                error={isInvalid}
+                helperText={errorMessage || description}
+                slotProps={{
+                    input: {
+                        startAdornment: startContent ? <InputAdornment position="start">{startContent}</InputAdornment> : null,
+                        endAdornment: endContent ? <InputAdornment position="end">{endContent}</InputAdornment> : null,
+                    }
+                }}
                 {...props}
             />
         );
@@ -56,3 +53,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = 'Input';
+
+export const Textarea = (props: any) => {
+    return <Input {...props} multiline rows={props.minRows || 4} />;
+};

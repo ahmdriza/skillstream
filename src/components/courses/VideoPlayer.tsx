@@ -3,9 +3,11 @@
 import { useState, useRef } from 'react';
 import {
     Card,
-    Button,
-    Slider
-} from '@heroui/react';
+    Slider,
+    IconButton,
+    Box,
+    Typography
+} from '@mui/material';
 import {
     IconPlayerPlay,
     IconPlayerPause,
@@ -105,7 +107,7 @@ export function VideoPlayer({
     };
 
     return (
-        <Card className="w-full bg-black overflow-hidden relative group">
+        <Card sx={{ width: '100%', bgcolor: 'black', overflow: 'hidden', position: 'relative', '&:hover .controls': { opacity: 1 } }}>
             <video
                 ref={videoRef}
                 src={src}
@@ -117,38 +119,47 @@ export function VideoPlayer({
             />
 
             {/* Controls Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent transition-opacity opacity-0 group-hover:opacity-100">
+            <Box className="controls" sx={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                p: 2,
+                background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+                opacity: 0,
+                transition: 'opacity 0.3s'
+            }}>
                 <Slider
                     aria-label="Video Progress"
-                    size="sm"
+                    size="small"
                     color="primary"
                     value={progress}
-                    onChange={(val) => handleSeek(val as number)}
-                    className="mb-2"
+                    onChange={(_, val) => handleSeek(val as number)}
+                    sx={{ mb: 1, color: 'primary.main', '& .MuiSlider-thumb': { transition: '0.3s cubic-bezier(.47,1.64,.41,.8)' } }}
                 />
 
                 <div className="flex justify-between items-center text-white">
                     <div className="flex gap-2 items-center">
-                        <Button isIconOnly variant="light" color="primary" className="text-white" onPress={togglePlay}>
+                        <IconButton onClick={togglePlay} sx={{ color: 'white' }}>
                             {isPlaying ? <IconPlayerPause size={20} /> : <IconPlayerPlay size={20} />}
-                        </Button>
+                        </IconButton>
 
                         <div className="flex gap-2 items-center group/vol">
-                            <Button isIconOnly variant="light" color="primary" className="text-white" onPress={toggleMute}>
+                            <IconButton onClick={toggleMute} sx={{ color: 'white' }}>
                                 {isMuted ? <IconVolumeOff size={20} /> : <IconVolume size={20} />}
-                            </Button>
-                            <div className="w-20 hidden group-hover/vol:block transition-all">
+                            </IconButton>
+                            <Box sx={{ width: 0, overflow: 'hidden', transition: 'width 0.2s', '.group\/vol:hover &': { width: 80 } }}>
                                 <Slider
                                     aria-label="Volume"
-                                    size="sm"
-                                    color="foreground"
-                                    minValue={0}
-                                    maxValue={1}
+                                    size="small"
+                                    min={0}
+                                    max={1}
                                     step={0.1}
                                     value={volume}
-                                    onChange={(val) => handleVolumeChange(val as number)}
+                                    onChange={(_, val) => handleVolumeChange(val as number)}
+                                    sx={{ color: 'white' }}
                                 />
-                            </div>
+                            </Box>
                         </div>
 
                         <span className="text-xs">
@@ -157,20 +168,20 @@ export function VideoPlayer({
                     </div>
 
                     <div className="flex gap-2">
-                        <Button isIconOnly variant="light" className="text-white">
+                        <IconButton sx={{ color: 'white' }}>
                             <IconSettings size={20} />
-                        </Button>
-                        <Button isIconOnly variant="light" className="text-white" onPress={toggleFullscreen}>
+                        </IconButton>
+                        <IconButton onClick={toggleFullscreen} sx={{ color: 'white' }}>
                             <IconMaximize size={20} />
-                        </Button>
+                        </IconButton>
                     </div>
                 </div>
-            </div>
+            </Box>
 
             {title && (
-                <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/70 to-transparent">
-                    <h3 className="text-white font-medium">{title}</h3>
-                </div>
+                <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, p: 2, background: 'linear-gradient(to bottom, rgba(0,0,0,0.7), transparent)' }}>
+                    <Typography variant="subtitle1" sx={{ color: 'white', fontWeight: 'medium' }}>{title}</Typography>
+                </Box>
             )}
         </Card>
     );

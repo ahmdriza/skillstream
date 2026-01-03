@@ -2,18 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { Card, CardBody, CardHeader, Divider } from '@/components/ui/Card';
+import { Tabs, Tab } from '@/components/ui/Tabs';
 import Link from 'next/link';
-import {
-    Input,
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Divider,
-    Tab,
-    Tabs,
-    Link as HeroLink
-} from '@heroui/react';
 import { IconBook, IconBrandGoogle, IconAlertCircle, IconEye, IconEyeOff } from '@tabler/icons-react';
 import { useAuth } from '@/context/AuthContext';
 import type { UserRole } from '@/types';
@@ -115,7 +108,7 @@ export default function RegisterPage() {
                                     fullWidth
                                     size="md"
                                     selectedKey={role}
-                                    onSelectionChange={(key) => setRole(key as UserRole)}
+                                    onSelectionChange={(key: React.Key) => setRole(key as UserRole)}
                                 >
                                     <Tab key="student" title={
                                         <div className="flex items-center space-x-2">

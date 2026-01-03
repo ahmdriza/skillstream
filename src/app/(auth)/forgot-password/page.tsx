@@ -2,12 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import {
-    Card,
-    CardBody,
-    Input,
-    Button,
-} from '@heroui/react';
+import { Card, CardBody } from '@/components/ui/Card';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
 import { IconBook, IconCheck, IconMail } from '@tabler/icons-react';
 
 export default function ForgotPasswordPage() {

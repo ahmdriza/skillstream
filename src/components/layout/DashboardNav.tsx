@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar } from "@heroui/react";
+import { Button, Menu, MenuItem, Avatar, Box, IconButton, ListItemIcon, ListItemText } from "@mui/material";
 import {
     IconLayoutDashboard,
     IconBook,
@@ -29,6 +30,9 @@ export function DashboardNav() {
     const router = useRouter();
     const { user, logout } = useAuth();
 
+    const [mobileAnchorEl, setMobileAnchorEl] = useState<null | HTMLElement>(null);
+    const [userAnchorEl, setUserAnchorEl] = useState<null | HTMLElement>(null);
+
     return (
         <div className="flex gap-2 items-center">
             {/* Desktop Nav */}
@@ -36,13 +40,21 @@ export function DashboardNav() {
                 {navItems.map((item) => (
                     <Button
                         key={item.href}
-                        as={Link}
+                        component={Link}
                         href={item.href}
-                        variant={pathname === item.href ? 'flat' : 'light'}
-                        color={pathname === item.href ? 'primary' : 'default'}
-                        size="sm"
-                        startContent={<item.icon size={16} />}
-                        onPress={() => router.push(item.href)}
+                        variant={pathname === item.href ? 'soft' as any : 'text'} // MUI doesn't have soft, use text or contained with styles.
+                        // Actually just use contained/text.
+                        // I'll simulate soft style if active
+                        sx={{
+                            color: pathname === item.href ? 'primary.main' : 'text.secondary',
+                            bgcolor: pathname === item.href ? 'primary.light' : 'transparent',
+                            '&:hover': {
+                                bgcolor: pathname === item.href ? 'primary.light' : 'action.hover',
+                            },
+                            textTransform: 'none',
+                        }}
+                        startIcon={<item.icon size={16} />}
+                        onClick={() => router.push(item.href)}
                     >
                         {item.label}
                     </Button>
@@ -51,59 +63,76 @@ export function DashboardNav() {
 
             {/* Mobile Dropdown */}
             <div className="md:hidden">
-                <Dropdown>
-                    <DropdownTrigger>
-                        <Button variant="light" endContent={<IconChevronDown size={14} />}>
-                            Menu
-                        </Button>
-                    </DropdownTrigger>
-                    <DropdownMenu aria-label="Dashboard Menu">
-                        {navItems.map((item) => (
-                            <DropdownItem
-                                key={item.href}
-                                href={item.href}
-                                startContent={<item.icon size={16} />}
-                            >
-                                {item.label}
-                            </DropdownItem>
-                        ))}
-                    </DropdownMenu>
-                </Dropdown>
+                <Button
+                    onClick={(e) => setMobileAnchorEl(e.currentTarget)}
+                    endIcon={<IconChevronDown size={14} />}
+                    color="inherit"
+                >
+                    Menu
+                </Button>
+                <Menu
+                    anchorEl={mobileAnchorEl}
+                    open={Boolean(mobileAnchorEl)}
+                    onClose={() => setMobileAnchorEl(null)}
+                >
+                    {navItems.map((item) => (
+                        <MenuItem
+                            key={item.href}
+                            onClick={() => { router.push(item.href); setMobileAnchorEl(null); }}
+                        >
+                            <ListItemIcon>
+                                <item.icon size={16} />
+                            </ListItemIcon>
+                            <ListItemText>{item.label}</ListItemText>
+                        </MenuItem>
+                    ))}
+                </Menu>
             </div>
 
             {/* User Menu */}
-            <Dropdown placement="bottom-end">
-                <DropdownTrigger>
-                    <div className="flex items-center gap-2 cursor-pointer ml-2">
-                        <Avatar src={user?.avatar} size="sm" isBordered color="primary" />
-                        <IconChevronDown size={14} className="text-default-500" />
-                    </div>
-                </DropdownTrigger>
+            <Box ml={2}>
+                <Box
+                    onClick={(e) => setUserAnchorEl(e.currentTarget)}
+                    sx={{ display: 'flex', alignItems: 'center', gap: 1, cursor: 'pointer' }}
+                >
+                    <Avatar src={user?.avatar} sx={{ width: 32, height: 32, border: '2px solid', borderColor: 'primary.main' }} />
+                    <IconChevronDown size={14} className="text-default-500" />
+                </Box>
 
-                <DropdownMenu aria-label="User Actions" variant="flat">
-                    <DropdownItem key="profile_header" className="h-14 gap-2">
-                        <p className="font-semibold">Signed in as</p>
-                        <p className="font-semibold">{user?.email}</p>
-                    </DropdownItem>
-                    <DropdownItem key="profile" startContent={<IconUser size={14} />} href="/profile">
+                <Menu
+                    anchorEl={userAnchorEl}
+                    open={Boolean(userAnchorEl)}
+                    onClose={() => setUserAnchorEl(null)}
+                >
+                    <Box sx={{ px: 2, py: 1 }}>
+                        <Typography variant="subtitle2">Signed in as</Typography>
+                        <Typography variant="body2" color="text.secondary">{user?.email}</Typography>
+                    </Box>
+                    <Divider />
+                    <MenuItem onClick={() => { router.push('/profile'); setUserAnchorEl(null); }}>
+                        <ListItemIcon><IconUser size={16} /></ListItemIcon>
                         Profile
-                    </DropdownItem>
-                    <DropdownItem key="settings" startContent={<IconSettings size={14} />} href="/profile">
+                    </MenuItem>
+                    <MenuItem onClick={() => { router.push('/profile'); setUserAnchorEl(null); }}>
+                        <ListItemIcon><IconSettings size={16} /></ListItemIcon>
                         Settings
-                    </DropdownItem>
-                    <DropdownItem
-                        key="logout"
-                        color="danger"
-                        startContent={<IconLogout size={14} />}
-                        onPress={() => {
+                    </MenuItem>
+                    <Divider />
+                    <MenuItem
+                        onClick={() => {
                             logout();
                             window.location.href = '/';
                         }}
+                        sx={{ color: 'error.main' }}
                     >
+                        <ListItemIcon sx={{ color: 'error.main' }}><IconLogout size={16} /></ListItemIcon>
                         Logout
-                    </DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
+                    </MenuItem>
+                </Menu>
+            </Box>
         </div>
     );
 }
+
+// Add imports ref
+import { Divider, Typography } from "@mui/material";

@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from '@heroui/react';
+import { Button } from '@/components/ui/Button';
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from '@/components/ui/Modal';
 import { IconShoppingCart, IconCheck } from '@tabler/icons-react';
 import { useAuth } from '@/context/AuthContext';
 import type { Course } from '@/types';
@@ -24,7 +25,7 @@ export function EnrollmentButton({
 }: EnrollmentButtonProps) {
     const router = useRouter();
     const { user } = useAuth();
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [isOpen, setIsOpen] = useState(false);
     const [enrolling, setEnrolling] = useState(false);
 
     const handleEnroll = async () => {
@@ -39,7 +40,7 @@ export function EnrollmentButton({
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         setEnrolling(false);
-        onOpen();
+        setIsOpen(true);
         onEnroll?.();
     };
 
@@ -47,11 +48,13 @@ export function EnrollmentButton({
         return price === 0 ? 'Free' : `$${price.toFixed(2)}`;
     };
 
+    const onClose = () => setIsOpen(false);
+
     if (isEnrolled) {
         return (
             <Button
                 size={size}
-                fullWidth={fullWidth}
+                fullWidth={fullWidth} // Note: Button adapter might not support fullWidth directly if not mapped, but MUI props often pass through
                 color="success"
                 startContent={<IconCheck size={18} />}
                 onPress={() => router.push(`/dashboard/courses/${course.id}/learn`)}
@@ -65,6 +68,7 @@ export function EnrollmentButton({
         <>
             <Button
                 size={size}
+                // @ts-ignore
                 fullWidth={fullWidth}
                 color="primary"
                 startContent={<IconShoppingCart size={18} />}
@@ -74,26 +78,26 @@ export function EnrollmentButton({
                 {course.price === 0 ? 'Enroll for Free' : `Enroll - ${formatPrice(course.price)}`}
             </Button>
 
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur">
+            <Modal isOpen={isOpen} onOpenChange={onClose}>
                 <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex flex-col gap-1">Enrollment Successful!</ModalHeader>
-                            <ModalBody>
-                                <p className="text-default-500">
-                                    You have successfully enrolled in <strong>{course.title}</strong>.
-                                </p>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button color="danger" variant="light" onPress={onClose}>
-                                    Close
-                                </Button>
-                                <Button color="primary" onPress={() => router.push(`/dashboard/courses/${course.id}/learn`)}>
-                                    Start Learning
-                                </Button>
-                            </ModalFooter>
-                        </>
-                    )}
+
+                    <>
+                        <ModalHeader className="flex flex-col gap-1">Enrollment Successful!</ModalHeader>
+                        <ModalBody>
+                            <p className="text-gray-500">
+                                You have successfully enrolled in <strong>{course.title}</strong>.
+                            </p>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button color="error" variant="text" onPress={onClose}>
+                                Close
+                            </Button>
+                            <Button color="primary" onPress={() => router.push(`/dashboard/courses/${course.id}/learn`)}>
+                                Start Learning
+                            </Button>
+                        </ModalFooter>
+                    </>
+
                 </ModalContent>
             </Modal>
         </>

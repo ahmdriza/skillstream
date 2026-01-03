@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '@heroui/react';
+import { Button } from '@/components/ui/Button';
 import { IconHome, IconSearch } from '@tabler/icons-react';
 
 export default function NotFound() {

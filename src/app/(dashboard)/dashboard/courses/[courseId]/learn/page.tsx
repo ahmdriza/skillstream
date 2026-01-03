@@ -6,14 +6,17 @@ import Link from 'next/link';
 import {
     Card,
     CardBody,
-    Button,
-    Progress,
+} from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import {
     Accordion,
-    AccordionItem,
-    Listbox,
-    ListboxItem,
-    ScrollShadow,
-} from '@heroui/react';
+    AccordionSummary,
+    AccordionDetails,
+    LinearProgress,
+    Box,
+    Typography,
+    Chip
+} from '@mui/material';
 import {
     IconArrowLeft,
     IconPlayerPlay,
@@ -23,6 +26,7 @@ import {
     IconQuestionMark,
     IconChevronLeft,
     IconChevronRight,
+    IconChevronDown,
 } from '@tabler/icons-react';
 import { VideoPlayer } from '@/components/courses/VideoPlayer';
 import coursesData from '@/data/courses.json';
@@ -37,15 +41,14 @@ export default function CourseLearnPage() {
 
     const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null);
     const [completedLessons, setCompletedLessons] = useState<string[]>([]);
-    // HeroUI Accordion uses Set or output of keys for selected keys
-    const [openedModules, setOpenedModules] = useState<Set<string>>(new Set());
+    const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set());
 
     useEffect(() => {
         if (course?.curriculum && course.curriculum.length > 0) {
             const firstModule = course.curriculum[0];
             if (firstModule.lessons.length > 0) {
                 setCurrentLesson(firstModule.lessons[0]);
-                setOpenedModules(new Set([firstModule.id]));
+                setExpandedModules(new Set([firstModule.id]));
             }
         }
     }, [course]);
@@ -56,7 +59,7 @@ export default function CourseLearnPage() {
 
     const curriculum = course.curriculum || [];
     const totalLessons = curriculum.reduce((acc, m) => acc + m.lessons.length, 0);
-    const progress = (completedLessons.length / totalLessons) * 100;
+    const progress = totalLessons > 0 ? (completedLessons.length / totalLessons) * 100 : 0;
 
     const handleLessonComplete = () => {
         if (currentLesson && !completedLessons.includes(currentLesson.id)) {
@@ -78,17 +81,27 @@ export default function CourseLearnPage() {
         if (newIndex >= 0 && newIndex < allLessons.length) {
             const next = allLessons[newIndex];
             setCurrentLesson(next.lesson);
-            if (!openedModules.has(next.moduleId)) {
-                const newSet = new Set(openedModules);
+            if (!expandedModules.has(next.moduleId)) {
+                const newSet = new Set(expandedModules);
                 newSet.add(next.moduleId);
-                setOpenedModules(newSet);
+                setExpandedModules(newSet);
             }
         }
     };
 
+    const toggleModule = (panelId: string) => {
+        const newSet = new Set(expandedModules);
+        if (newSet.has(panelId)) {
+            newSet.delete(panelId);
+        } else {
+            newSet.add(panelId);
+        }
+        setExpandedModules(newSet);
+    };
+
     const getLessonIcon = (lesson: Lesson) => {
         if (completedLessons.includes(lesson.id)) {
-            return <IconCheck size={16} className="text-success" />;
+            return <IconCheck size={16} className="text-green-500" />;
         }
         switch (lesson.type) {
             case 'video':
@@ -101,9 +114,9 @@ export default function CourseLearnPage() {
     };
 
     return (
-        <div className="min-h-screen bg-default-50 flex flex-col">
+        <div className="min-h-screen bg-gray-50 flex flex-col">
             {/* Header */}
-            <div className="sticky top-0 z-50 bg-background border-b border-divider px-4 py-3 shadow-sm">
+            <div className="sticky top-0 z-50 bg-white border-b border-gray-200 px-4 py-3 shadow-sm">
                 <div className="flex items-center justify-between max-w-[1600px] mx-auto w-full">
                     <div className="flex items-center gap-4">
                         <Button
@@ -116,16 +129,16 @@ export default function CourseLearnPage() {
                             <IconArrowLeft size={20} />
                         </Button>
                         <div>
-                            <p className="text-tiny text-default-500 uppercase font-bold">Course</p>
-                            <h1 className="text-medium font-bold line-clamp-1">{course.title}</h1>
+                            <p className="text-xs text-gray-500 uppercase font-bold">Course</p>
+                            <h1 className="text-base font-bold line-clamp-1">{course.title}</h1>
                         </div>
                     </div>
                     <div className="w-48 hidden sm:block">
                         <div className="flex justify-between mb-1">
-                            <span className="text-tiny text-default-500">Progress</span>
-                            <span className="text-tiny font-medium">{Math.round(progress)}%</span>
+                            <span className="text-xs text-gray-500">Progress</span>
+                            <span className="text-xs font-medium">{Math.round(progress)}%</span>
                         </div>
-                        <Progress value={progress} size="sm" color="success" aria-label="Course Progress" />
+                        <LinearProgress variant="determinate" value={progress} color="success" sx={{ height: 6, borderRadius: 3 }} />
                     </div>
                 </div>
             </div>
@@ -144,7 +157,7 @@ export default function CourseLearnPage() {
 
                         {/* Lesson Navigation */}
                         <Card shadow="sm" className="hidden sm:flex">
-                            <CardBody className="p-4 flex-row justify-between items-center bg-content1">
+                            <CardBody className="p-4 flex-row justify-between items-center bg-white">
                                 <Button
                                     variant="light"
                                     startContent={<IconChevronLeft size={16} />}
@@ -153,8 +166,8 @@ export default function CourseLearnPage() {
                                     Previous
                                 </Button>
                                 <div className="text-center">
-                                    <h3 className="font-semibold text-medium">{currentLesson?.title}</h3>
-                                    <p className="text-small text-default-500">{currentLesson?.duration}</p>
+                                    <h3 className="font-semibold text-base">{currentLesson?.title}</h3>
+                                    <p className="text-sm text-gray-500">{currentLesson?.duration}</p>
                                 </div>
                                 <Button
                                     variant="light"
@@ -190,56 +203,60 @@ export default function CourseLearnPage() {
 
                 {/* Sidebar - Curriculum */}
                 <div className="lg:col-span-3 order-2 lg:order-2 h-full">
-                    <Card className="h-full lg:max-h-[calc(100vh-120px)] rounded-none lg:rounded-medium border-t lg:border-none border-divider">
-                        <div className="p-4 border-b border-divider bg-default-50">
-                            <h3 className="font-bold text-medium">Course Content</h3>
-                            <p className="text-small text-default-500">
+                    <Card className="h-full lg:max-h-[calc(100vh-120px)] rounded-none lg:rounded-lg border-t lg:border-none border-gray-200">
+                        <div className="p-4 border-b border-gray-200 bg-gray-50">
+                            <h3 className="font-bold text-base">Course Content</h3>
+                            <p className="text-sm text-gray-500">
                                 {completedLessons.length} of {totalLessons} lessons completed
                             </p>
                         </div>
 
-                        <ScrollShadow className="h-[400px] lg:h-full overflow-y-auto">
-                            <Accordion
-                                selectionMode="multiple"
-                                selectedKeys={openedModules}
-                                onSelectionChange={(keys) => setOpenedModules(keys as Set<string>)}
-                                variant="light"
-                                itemClasses={{
-                                    title: "text-small font-medium",
-                                    trigger: "py-3",
-                                    content: "pb-2 pt-0",
-                                }}
-                            >
-                                {curriculum.map((module, moduleIndex) => (
-                                    <AccordionItem
-                                        key={module.id}
-                                        aria-label={`Module ${moduleIndex + 1}`}
-                                        title={`Module ${moduleIndex + 1}: ${module.title}`}
-                                        subtitle={`${module.lessons.length} lessons`}
-                                    >
-                                        <div className="flex flex-col gap-1 w-full pl-2">
+                        <Box className="h-[400px] lg:h-full overflow-y-auto">
+                            {curriculum.map((module, moduleIndex) => (
+                                <Accordion
+                                    key={module.id}
+                                    expanded={expandedModules.has(module.id)}
+                                    onChange={() => toggleModule(module.id)}
+                                    disableGutters
+                                    elevation={0}
+                                    sx={{ '&:before': { display: 'none' }, borderBottom: '1px solid #e5e7eb' }}
+                                >
+                                    <AccordionSummary expandIcon={<IconChevronDown size={16} />}>
+                                        <Box>
+                                            <Typography variant="caption" sx={{ display: 'block', color: 'text.secondary' }}>
+                                                Module {moduleIndex + 1}
+                                            </Typography>
+                                            <Typography variant="subtitle2" sx={{ fontWeight: 'medium', lineHeight: 1.2 }}>
+                                                {module.title}
+                                            </Typography>
+                                            <Typography variant="caption" color="text.secondary">
+                                                {module.lessons.length} lessons
+                                            </Typography>
+                                        </Box>
+                                    </AccordionSummary>
+                                    <AccordionDetails sx={{ p: 0 }}>
+                                        <div className="flex flex-col w-full">
                                             {module.lessons.map((lesson) => {
                                                 const isActive = currentLesson?.id === lesson.id;
-                                                const isCompleted = completedLessons.includes(lesson.id);
 
                                                 return (
                                                     <div
                                                         key={lesson.id}
                                                         className={`
-                                                            group flex items-center justify-between p-2 rounded-medium cursor-pointer transition-colors
-                                                            ${isActive ? 'bg-primary/10 text-primary' : 'hover:bg-default-100'}
+                                                            group flex items-center justify-between p-3 cursor-pointer transition-colors border-l-2
+                                                            ${isActive ? 'bg-blue-50 border-blue-500' : 'hover:bg-gray-50 border-transparent'}
                                                         `}
                                                         onClick={() => setCurrentLesson(lesson)}
                                                     >
-                                                        <div className="flex items-center gap-3">
-                                                            <div className={isActive ? 'text-primary' : 'text-default-400'}>
+                                                        <div className="flex items-center gap-3 w-full">
+                                                            <div className={isActive ? 'text-blue-500' : 'text-gray-400'}>
                                                                 {getLessonIcon(lesson)}
                                                             </div>
-                                                            <div className="flex flex-col">
-                                                                <span className={`text-small font-medium ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                                                            <div className="flex flex-col min-w-0 flex-1">
+                                                                <span className={`text-sm font-medium truncate ${isActive ? 'text-blue-700' : 'text-gray-900'}`}>
                                                                     {lesson.title}
                                                                 </span>
-                                                                <span className="text-tiny text-default-400">
+                                                                <span className="text-xs text-gray-500">
                                                                     {lesson.duration}
                                                                 </span>
                                                             </div>
@@ -248,10 +265,10 @@ export default function CourseLearnPage() {
                                                 );
                                             })}
                                         </div>
-                                    </AccordionItem>
-                                ))}
-                            </Accordion>
-                        </ScrollShadow>
+                                    </AccordionDetails>
+                                </Accordion>
+                            ))}
+                        </Box>
                     </Card>
                 </div>
             </div>

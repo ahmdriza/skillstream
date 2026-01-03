@@ -1,34 +1,28 @@
 'use client';
 
-import { Card as HeroCard, CardBody, CardHeader, CardFooter, CardProps as HeroCardProps } from "@heroui/react";
-import { forwardRef, ReactNode } from 'react';
+import { Card as MuiCard, CardContent, Box } from "@mui/material";
 
-export interface CardProps extends HeroCardProps {
-    children: ReactNode;
-    header?: ReactNode;
-    footer?: ReactNode;
-    hoverable?: boolean;
-}
+export const Card = ({ className, children, shadow = "md", ...props }: any) => {
+    // shadow prop mapping could be implemented if needed, MUI Card has elevation
+    return (
+        <MuiCard className={className} elevation={shadow === "sm" ? 1 : 3} {...props}>
+            {children}
+        </MuiCard>
+    );
+};
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(
-    ({ children, header, footer, hoverable, className, ...props }, ref) => {
-        return (
-            <HeroCard
-                ref={ref}
-                shadow="sm"
-                isPressable={hoverable}
-                className={`p-2 ${className || ''}`}
-                {...props}
-            >
-                {header && <CardHeader className="p-3 pb-0">{header}</CardHeader>}
-                <CardBody className="p-3">{children}</CardBody>
-                {footer && <CardFooter className="p-3 pt-0">{footer}</CardFooter>}
-            </HeroCard>
-        );
-    }
+export const CardBody = ({ className, children, ...props }: any) => (
+    <CardContent className={className} {...props}>{children}</CardContent>
 );
 
-Card.displayName = 'Card';
+export const CardHeader = ({ className, children, ...props }: any) => (
+    <Box className={`p-4 flex flex-col items-start ${className}`} {...props}>{children}</Box>
+);
 
-// Export subcomponents for flexible usage
-export { CardHeader, CardBody, CardFooter };
+export const CardFooter = ({ className, children, ...props }: any) => (
+    <Box className={`p-4 flex items-center ${className}`} {...props}>{children}</Box>
+);
+
+export const Divider = ({ className, ...props }: any) => (
+    <Box component="hr" className={`border-t border-gray-200 my-0 ${className}`} {...props} />
+);

@@ -1,13 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import {
-    Input,
-    Textarea,
-    Button,
-    Card,
-    CardBody,
-} from '@heroui/react';
+import { Input, Textarea } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { Card, CardBody } from '@/components/ui/Card';
 import { IconMail, IconPhone, IconMapPin, IconCheck } from '@tabler/icons-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -30,11 +26,11 @@ export default function ContactPage() {
         <div className="min-h-screen flex flex-col">
             <Header />
 
-            <div className="flex-1 bg-default-50 py-16">
+            <div className="flex-1 bg-gray-50 py-16">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-12">
                         <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-                        <p className="text-default-500 max-w-lg mx-auto">
+                        <p className="text-gray-500 max-w-lg mx-auto">
                             Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
                         </p>
                     </div>
@@ -46,24 +42,24 @@ export default function ContactPage() {
                                 <CardBody>
                                     {submitted ? (
                                         <div className="flex flex-col items-center py-12 text-center gap-4">
-                                            <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+                                            <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-600">
                                                 <IconCheck size={32} />
                                             </div>
                                             <h3 className="text-xl font-bold">Thank you!</h3>
-                                            <p className="text-default-500">We'll get back to you within 24 hours.</p>
-                                            <Button variant="flat" onPress={() => setSubmitted(false)}>
+                                            <p className="text-gray-500">We'll get back to you within 24 hours.</p>
+                                            <Button variant="outlined" onPress={() => setSubmitted(false)}>
                                                 Send another message
                                             </Button>
                                         </div>
                                     ) : (
                                         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                                             <div className="grid grid-cols-2 gap-4">
-                                                <Input label="First Name" placeholder="John" variant="bordered" labelPlacement="outside" isRequired />
-                                                <Input label="Last Name" placeholder="Doe" variant="bordered" labelPlacement="outside" isRequired />
+                                                <Input label="First Name" placeholder="John" variant="outlined" isRequired />
+                                                <Input label="Last Name" placeholder="Doe" variant="outlined" isRequired />
                                             </div>
-                                            <Input label="Email" placeholder="john@example.com" type="email" variant="bordered" labelPlacement="outside" isRequired />
-                                            <Input label="Subject" placeholder="How can we help?" variant="bordered" labelPlacement="outside" isRequired />
-                                            <Textarea label="Message" placeholder="Your message..." minRows={5} variant="bordered" labelPlacement="outside" isRequired />
+                                            <Input label="Email" placeholder="john@example.com" type="email" variant="outlined" isRequired />
+                                            <Input label="Subject" placeholder="How can we help?" variant="outlined" isRequired />
+                                            <Textarea label="Message" placeholder="Your message..." minRows={5} variant="outlined" isRequired />
                                             <Button type="submit" color="primary" size="lg" className="font-semibold">Send Message</Button>
                                         </form>
                                     )}
@@ -77,11 +73,11 @@ export default function ContactPage() {
                                 {contactInfo.map((info) => (
                                     <Card key={info.label} shadow="sm">
                                         <CardBody className="p-4 flex-row gap-4 items-center">
-                                            <div className="w-12 h-12 rounded-medium bg-primary/10 flex items-center justify-center text-primary">
+                                            <div className="w-12 h-12 rounded-medium bg-blue-50 flex items-center justify-center text-blue-600">
                                                 <info.icon size={24} />
                                             </div>
                                             <div>
-                                                <p className="text-small text-default-500">{info.label}</p>
+                                                <p className="text-small text-gray-500">{info.label}</p>
                                                 <p className="font-medium">{info.value}</p>
                                             </div>
                                         </CardBody>
