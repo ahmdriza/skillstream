@@ -17,6 +17,15 @@ const theme = createTheme({
             paper: '#ffffff',
         }
     },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 640,
+            md: 768,
+            lg: 1024,
+            xl: 1280,
+        },
+    },
     typography: {
         fontFamily: 'var(--font-geist-sans), Inter, sans-serif',
     },

@@ -38,7 +38,7 @@ export function CourseCard({ course, instructor }: CourseCardProps) {
             onClick={handlePress}
         >
             <CardBody className="overflow-visible p-0 relative">
-                <Box sx={{ height: 180, borderRadius: 2, overflow: 'hidden' }}>
+                <Box sx={{ aspectRatio: '16/9', borderRadius: 2, overflow: 'hidden' }}>
                     <Image
                         alt={course.title}
                         src={course.thumbnail}

@@ -140,7 +140,7 @@ function CourseCatalogContent() {
                     {/* Course Grid */}
                     <div className="col-span-1 md:col-span-3">
                         {/* Toolbar */}
-                        <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6 flex flex-col md:flex-row gap-4 justify-between items-center shadow-sm">
+                        <div className="bg-white border border-gray-100 rounded-2xl p-5 mb-8 flex flex-col md:flex-row gap-5 justify-between items-center shadow-lg shadow-gray-200/40 sticky top-20 z-20">
                             <Input
                                 placeholder="Search courses..."
                                 startContent={<IconSearch size={16} />}
