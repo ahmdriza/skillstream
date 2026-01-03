@@ -19,7 +19,7 @@ export type InputProps = Omit<TextFieldProps, 'variant' | 'size'> & {
 };
 
 export const Input = forwardRef<HTMLDivElement, InputProps>(
-    ({ startContent, endContent, onValueChange, onChange, variant = "outlined", size = "md", classNames, isRequired, description, errorMessage, isInvalid, label, ...props }, ref) => {
+    ({ startContent, endContent, onValueChange, onChange, variant = "outlined", size = "md", classNames, isRequired, description, errorMessage, isInvalid, label, labelPlacement, isClearable, ...props }, ref) => {
 
         const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             if (onChange) onChange(e);
