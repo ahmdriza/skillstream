@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar } from '@mui/material';
+import { Avatar, Container } from '@mui/material';
 import { Card, CardBody } from '@/components/ui/Card';
 import { IconUsers, IconBook, IconGlobe, IconHeart } from '@tabler/icons-react';
 import { Header } from '@/components/layout/Header';
@@ -32,17 +32,17 @@ export default function AboutPage() {
             <div className="flex-1 bg-gray-50">
                 {/* Hero */}
                 <div className="py-20 bg-white text-center border-b border-gray-200">
-                    <div className="container mx-auto px-6">
+                    <Container maxWidth="xl" className="px-6">
                         <h1 className="text-4xl font-bold mb-4">About SkillStream</h1>
                         <p className="text-lg text-gray-500 max-w-2xl mx-auto">
                             We're on a mission to make quality education accessible to everyone, everywhere.
                             Through live classes and self-paced courses, we're transforming how people learn.
                         </p>
-                    </div>
+                    </Container>
                 </div>
 
                 {/* Stats */}
-                <div className="container mx-auto px-6 py-16">
+                <Container maxWidth="xl" className="px-6 py-16">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {[
                             { icon: IconUsers, value: '50,000+', label: 'Students', color: 'bg-blue-100 text-blue-600' },
@@ -63,22 +63,22 @@ export default function AboutPage() {
                             </Card>
                         ))}
                     </div>
-                </div>
+                </Container>
 
                 {/* Mission */}
                 <div className="bg-white py-16">
-                    <div className="container mx-auto px-6 text-center">
+                    <Container maxWidth="xl" className="px-6 text-center">
                         <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
                         <p className="text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed">
                             At SkillStream, we believe that learning should be engaging, accessible, and effective.
                             We combine the flexibility of online learning with the engagement of live instruction
                             to create an unparalleled educational experience.
                         </p>
-                    </div>
+                    </Container>
                 </div>
 
                 {/* Team */}
-                <div className="container mx-auto px-6 py-16">
+                <Container maxWidth="xl" className="px-6 py-16">
                     <h2 className="text-3xl font-bold text-center mb-12">Our Team</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                         {team.map((member) => (
@@ -93,7 +93,7 @@ export default function AboutPage() {
                             </Card>
                         ))}
                     </div>
-                </div>
+                </Container>
             </div>
 
             <Footer />

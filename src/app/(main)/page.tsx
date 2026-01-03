@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card, CardBody } from '@/components/ui/Card';
-import { Chip, Avatar, AvatarGroup } from '@mui/material';
+import { Chip, Avatar, AvatarGroup, Container } from '@mui/material';
 import {
   IconPlayerPlay,
   IconUsers,
@@ -65,7 +65,7 @@ export default function HomePage() {
           <div className="absolute -top-[20%] right-[-10%] w-[800px] h-[800px] rounded-full bg-blue-400/10 blur-[100px] pointer-events-none animate-pulse-slow" />
           <div className="absolute top-[20%] -left-[10%] w-[600px] h-[600px] rounded-full bg-indigo-300/10 blur-[100px] pointer-events-none animate-pulse-slow" style={{ animationDelay: '1s' }} />
 
-          <div className="container mx-auto px-6 py-24 md:py-32 relative z-10">
+          <Container maxWidth="xl" className="px-6 py-24 md:py-32 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="flex flex-col gap-8">
                 <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 w-fit">
@@ -154,11 +154,11 @@ export default function HomePage() {
                 <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-600 rounded-full blur-2xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }} />
               </div>
             </div>
-          </div>
+          </Container>
         </div>
 
         {/* Stats Section with Glassmorphism */}
-        <div className="container mx-auto px-6 -mt-10 relative z-20">
+        <Container maxWidth="xl" className="px-6 -mt-10 relative z-20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { icon: IconUsers, label: 'Active Learners', value: '12.5k+' },
@@ -179,12 +179,12 @@ export default function HomePage() {
               </Card>
             ))}
           </div>
-        </div>
+        </Container>
 
         {/* Categories Section */}
         <section className="py-32 bg-background relative">
           <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30" />
-          <div className="container mx-auto px-6 relative z-10">
+          <Container maxWidth="xl" className="px-6 relative z-10">
             <div className="flex justify-between items-end mb-12">
               <div className="max-w-md">
                 <span className="text-primary font-bold uppercase tracking-widest text-xs">Discover</span>
@@ -217,12 +217,12 @@ export default function HomePage() {
                 );
               })}
             </div>
-          </div>
+          </Container>
         </section>
 
         {/* Featured Courses Section */}
         <section className="py-24 bg-default-50/50 border-y border-default-100">
-          <div className="container mx-auto px-6">
+          <Container maxWidth="xl" className="px-6">
             <div className="flex justify-between items-center mb-12">
               <div>
                 <h2 className="text-3xl font-bold">Featured Courses</h2>
@@ -248,7 +248,7 @@ export default function HomePage() {
                 />
               ))}
             </div>
-          </div>
+          </Container>
         </section>
 
         {/* CTA Section */}

@@ -8,6 +8,7 @@ import {
     IconBrandLinkedin,
     IconBook,
 } from '@tabler/icons-react';
+import { Container } from '@mui/material';
 import { Button } from '@/components/ui/Button';
 
 const footerLinks = {
@@ -34,7 +35,7 @@ const footerLinks = {
 export function Footer() {
     return (
         <footer className="bg-gray-50/50 border-t border-default-200/50 text-default-600 mt-auto">
-            <div className="container mx-auto px-6 py-12">
+            <Container maxWidth="xl" className="px-6 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                     {/* Brand Column */}
                     <div className="md:col-span-1">
@@ -93,18 +94,18 @@ export function Footer() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Container>
 
             {/* Bottom Bar */}
             <div className="border-t border-default-200/50 bg-white/50">
-                <div className="container mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                <Container maxWidth="xl" className="px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-tiny text-default-400">
                         © 2026 SkillStream. All rights reserved.
                     </p>
                     <div className="flex gap-4">
                         <p className="text-tiny text-default-400">Made with ❤️ for learners everywhere</p>
                     </div>
-                </div>
+                </Container>
             </div>
         </footer>
     );

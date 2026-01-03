@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Container } from '@mui/material';
 import { Input, Textarea } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Card, CardBody } from '@/components/ui/Card';
@@ -27,7 +28,7 @@ export default function ContactPage() {
             <Header />
 
             <div className="flex-1 bg-gray-50 py-16">
-                <div className="max-w-7xl mx-auto px-6">
+                <Container maxWidth="xl" className="px-6">
                     <div className="text-center mb-12">
                         <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
                         <p className="text-gray-500 max-w-lg mx-auto">
@@ -86,10 +87,10 @@ export default function ContactPage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Container>
             </div>
 
             <Footer />
-        </div>
+        </div >
     );
 }

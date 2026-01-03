@@ -11,7 +11,8 @@ import {
     CircularProgress,
     Box,
     FormControl,
-    InputLabel
+    InputLabel,
+    Container
 } from '@mui/material';
 import { Button } from '@/components/ui/Button';
 import {
@@ -115,7 +116,7 @@ function CourseCatalogContent() {
         <div className="min-h-screen flex flex-col bg-gray-50 font-sans">
             <Header />
 
-            <div className="flex-1 container mx-auto px-6 py-8">
+            <Container maxWidth="xl" className="flex-1 px-6 py-8">
                 {/* Breadcrumb */}
                 <div className="text-small text-gray-500 mb-2">
                     Home {'>'} Courses
@@ -226,10 +227,10 @@ function CourseCatalogContent() {
                         )}
                     </div>
                 </div>
-            </div>
+            </Container>
 
             <Footer />
-        </div>
+        </div >
     );
 }
 

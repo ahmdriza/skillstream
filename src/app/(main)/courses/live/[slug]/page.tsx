@@ -13,6 +13,7 @@ import {
     TableHead,
     TableRow,
     Paper,
+    Container,
 } from '@mui/material';
 import { Card, CardBody } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -76,7 +77,7 @@ export default function LiveCourseDetailPage(props: PageProps) {
 
             {/* Hero Section */}
             <div className="bg-white border-b border-gray-200 py-16">
-                <div className="max-w-7xl mx-auto px-6">
+                <Container maxWidth="xl" className="px-6">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
                         <div className="md:col-span-8 space-y-6">
                             <div className="flex gap-2 flex-wrap">
@@ -123,12 +124,13 @@ export default function LiveCourseDetailPage(props: PageProps) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Container>
             </div>
+
 
             {/* Main Content */}
             <div className="flex-1 bg-gray-50 py-12">
-                <div className="max-w-7xl mx-auto px-6">
+                <Container maxWidth="xl" className="px-6">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
                         {/* Left Content */}
                         <div className="md:col-span-8">
@@ -339,9 +341,9 @@ export default function LiveCourseDetailPage(props: PageProps) {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </Container>
 
+            </div>
             <Footer />
         </div>
     );

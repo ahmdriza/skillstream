@@ -14,15 +14,28 @@ export const Tabs = ({
     classNames,
     ...props
 }: any) => {
+    const arrayChildren = Children.toArray(children) as React.ReactElement[];
+
+    // Helper to get consistent value from child
+    const getChildValue = (child: React.ReactElement<any>) => {
+        let key = child.key?.toString();
+        if (key?.startsWith('.$')) {
+            key = key.substring(2);
+        }
+        return key || child.props.title;
+    };
+
     // Handle both controlled and uncontrolled state
-    const [internalValue, setInternalValue] = useState(
-        selectedKey || (Array.isArray(children) && children[0] ? children[0].key : null)
-    );
+    const [internalValue, setInternalValue] = useState(() => {
+        if (selectedKey !== undefined) return selectedKey;
+        const firstValidChild = arrayChildren.find(child => isValidElement(child));
+        return firstValidChild ? getChildValue(firstValidChild) : null;
+    });
 
     const isControlled = selectedKey !== undefined;
     const value = isControlled ? selectedKey : internalValue;
 
-    const handleChange = (event: any, newValue: any) => {
+    const handleChange = (event: React.SyntheticEvent, newValue: any) => {
         if (!isControlled) {
             setInternalValue(newValue);
         }
@@ -30,8 +43,6 @@ export const Tabs = ({
             onSelectionChange(newValue);
         }
     };
-
-    const arrayChildren = Children.toArray(children);
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -47,17 +58,13 @@ export const Tabs = ({
             >
                 {arrayChildren.map((child) => {
                     if (!isValidElement(child)) return null;
-                    const reactChild = child as React.ReactElement<any>; // Cast to access props
-                    const childKey = reactChild.key; // React key
-                    // For MUI Tab value, we need a string/number.
-                    // If key is null, use index or title? HeroUI usually requires key.
-                    // Let's assume key is present or fallback.
-                    const value = childKey || reactChild.props.title;
+                    const reactChild = child as React.ReactElement<any>;
+                    const childValue = getChildValue(reactChild);
 
                     return (
                         <MuiTab
-                            key={childKey ?? value}
-                            value={value}
+                            key={childValue}
+                            value={childValue}
                             label={reactChild.props.title}
                             icon={reactChild.props.icon}
                             iconPosition="start"
@@ -72,13 +79,12 @@ export const Tabs = ({
             {arrayChildren.map((child) => {
                 if (!isValidElement(child)) return null;
                 const reactChild = child as React.ReactElement<any>;
-                const childKey = reactChild.key;
-                const childValue = childKey || reactChild.props.title;
+                const childValue = getChildValue(reactChild);
 
                 if (childValue !== value) return null;
 
                 return (
-                    <Box key={childKey ?? childValue} role="tabpanel">
+                    <Box key={childValue} role="tabpanel">
                         {reactChild.props.children}
                     </Box>
                 );
