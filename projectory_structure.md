@@ -14,8 +14,10 @@ src/
 │   │   ├── page.tsx                   # Homepage
 │   │   ├── courses/
 │   │   │   ├── page.tsx               # Catalog
-│   │   │   ├── recorded/[slug]/page.tsx
-│   │   │   └── live/[slug]/page.tsx
+│   │   │   ├── recorded/
+│   │   │   │   └── [slug]/page.tsx
+│   │   │   └── live/
+│   │   │       └── [slug]/page.tsx
 │   │   ├── about/page.tsx
 │   │   └── contact/page.tsx
 │   │
@@ -25,7 +27,8 @@ src/
 │   │       ├── page.tsx
 │   │       ├── courses/
 │   │       │   ├── page.tsx
-│   │       │   └── [courseId]/learn/page.tsx  ✓ NEW
+│   │       │   └── [courseId]/
+│   │       │       └── learn/page.tsx
 │   │       ├── sessions/page.tsx
 │   │       ├── progress/page.tsx
 │   │       └── certificates/page.tsx
@@ -38,94 +41,102 @@ src/
 │
 ├── components/
 │   ├── ui/                            # Reusable UI components
-│   │   ├── Button.tsx                 ✓
-│   │   ├── Card.tsx                   ✓
-│   │   ├── Input.tsx                  ✓
-│   │   ├── Modal.tsx                  ✓
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   ├── Checkbox.tsx
+│   │   ├── Input.tsx
+│   │   ├── Modal.tsx
+│   │   ├── Tabs.tsx
 │   │   └── index.ts
 │   │
 │   ├── layout/
-│   │   ├── Header.tsx                 ✓
-│   │   ├── Footer.tsx                 ✓
-│   │   ├── Sidebar.tsx                ✓ NEW
-│   │   ├── DashboardNav.tsx           ✓ NEW
+│   │   ├── Header.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Sidebar.tsx
+│   │   ├── DashboardNav.tsx
 │   │   └── index.ts
 │   │
 │   ├── courses/
-│   │   ├── CourseCard.tsx             ✓
-│   │   ├── CourseGrid.tsx             ✓ NEW
-│   │   ├── CourseFilter.tsx           ✓ NEW
-│   │   ├── VideoPlayer.tsx            ✓ NEW
-│   │   ├── LiveSessionCard.tsx        ✓ NEW
-│   │   ├── EnrollmentButton.tsx       ✓ NEW
+│   │   ├── CourseCard.tsx
+│   │   ├── CourseGrid.tsx
+│   │   ├── CourseFilter.tsx
+│   │   ├── VideoPlayer.tsx
+│   │   ├── LiveSessionCard.tsx
+│   │   ├── EnrollmentButton.tsx
+│   │   ├── LiveCourseDetail.tsx
+│   │   ├── RecordedCourseDetail.tsx
 │   │   └── index.ts
 │   │
 │   ├── dashboard/
-│   │   ├── ProgressBar.tsx            ✓ NEW
-│   │   ├── SessionCalendar.tsx        ✓ NEW
-│   │   ├── CourseList.tsx             ✓ NEW
-│   │   ├── StatCard.tsx               ✓ NEW
+│   │   ├── ProgressBar.tsx
+│   │   ├── SessionCalendar.tsx
+│   │   ├── CourseList.tsx
+│   │   ├── StatCard.tsx
 │   │   └── index.ts
 │   │
 │   └── profile/
-│       ├── ProfileHeader.tsx          ✓ NEW
-│       ├── EditProfile.tsx            ✓ NEW
-│       ├── AchievementBadge.tsx       ✓ NEW
+│       ├── ProfileHeader.tsx
+│       ├── EditProfile.tsx
+│       ├── AchievementBadge.tsx
 │       └── index.ts
 │
 ├── context/
-│   ├── AuthContext.tsx                ✓
-│   └── ThemeContext.tsx               ✓
+│   ├── AuthContext.tsx
+│   └── ThemeContext.tsx
 │
 ├── lib/
-│   ├── api.ts                         ✓
-│   ├── auth.ts                        ✓
-│   ├── constants.ts                   ✓
-│   └── utils.ts                       ✓
+│   ├── api.ts
+│   ├── auth.ts
+│   ├── constants.ts
+│   └── utils.ts
 │
 ├── types/
-│   ├── course.ts                      ✓
-│   ├── user.ts                        ✓
-│   ├── enrollment.ts                  ✓
-│   ├── session.ts                     ✓
+│   ├── course.ts
+│   ├── user.ts
+│   ├── enrollment.ts
+│   ├── session.ts
 │   └── index.ts
 │
 └── data/
-    ├── courses.json                   ✓
-    ├── instructors.json               ✓
-    ├── categories.json                ✓
-    └── users.json                     ✓
+    ├── courses.json
+    ├── instructors.json
+    ├── categories.json
+    └── users.json
 ```
 
 ## Components Summary
 
 ### UI Components (`/components/ui/`)
-- **Button** - Wrapper around Mantine Button with loading state
-- **Card** - Wrapper around Mantine Card with hover option
-- **Input** - Text/Password input with type switching
-- **Modal** - Centered modal dialog
+- **Button** - Custom button component with loading state and variants.
+- **Card** - Reusable card container with hover effects.
+- **Checkbox** - Checkbox input component.
+- **Input** - Text/Password input with validation states.
+- **Modal** - Accessible modal dialog for overlays.
+- **Tabs** - Tabbed interface component.
 
 ### Layout Components (`/components/layout/`)
-- **Header** - Main navigation header with search and auth
-- **Footer** - Site footer with links and social icons
-- **Sidebar** - Dashboard sidebar navigation
-- **DashboardNav** - Horizontal dashboard navigation
+- **Header** - Main navigation header with responsive mobile menu.
+- **Footer** - Site footer with sitemap and social links.
+- **Sidebar** - Vertical navigation sidebar for the dashboard.
+- **DashboardNav** - Top navigation bar for the dashboard area.
 
 ### Course Components (`/components/courses/`)
-- **CourseCard** - Course preview card with image and details
-- **CourseGrid** - Grid/list layout for courses
-- **CourseFilter** - Expandable filter panel for catalog
-- **VideoPlayer** - Video player with controls and progress
-- **LiveSessionCard** - Live session card with status
-- **EnrollmentButton** - Enroll button with auth check
+- **CourseCard** - Card displaying course summary (image, title, instructor).
+- **CourseGrid** - Responsive grid or list layout for displaying courses.
+- **CourseFilter** - Sidebar or modal for filtering courses by category, level, etc.
+- **VideoPlayer** - Custom video player for course content.
+- **LiveSessionCard** - Card specifically for displaying upcoming live sessions.
+- **EnrollmentButton** - Action button handling course enrollment logic.
+- **LiveCourseDetail** - Detailed view for live courses.
+- **RecordedCourseDetail** - Detailed view for recorded courses.
 
 ### Dashboard Components (`/components/dashboard/`)
-- **ProgressBar** - Simple and multi-section progress bars
-- **SessionCalendar** - Calendar with session indicators
-- **CourseList** - List of enrolled courses with progress
-- **StatCard** - Statistics card with icon
+- **ProgressBar** - Visual indicator of course or session progress.
+- **SessionCalendar** - Calendar view of scheduled sessions.
+- **CourseList** - List view of enrolled courses in the dashboard.
+- **StatCard** - Card displaying key metrics (e.g., hours learned, courses completed).
 
 ### Profile Components (`/components/profile/`)
-- **ProfileHeader** - User profile header with avatar
-- **EditProfile** - Profile editing form
-- **AchievementBadge** - Achievement/badge display
+- **ProfileHeader** - Header section of the user profile with avatar and basic info.
+- **EditProfile** - Form for updating user profile details.
+- **AchievementBadge** - Display component for earned certificates and badges.
